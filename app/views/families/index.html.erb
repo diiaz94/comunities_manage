@@ -1,0 +1,51 @@
+<% if session[:type_user]=="Administrador"%>
+  <h1>Lista de familias</h1>  
+<%end%>
+<% if session[:type_user]=="Miembro"%>
+  <h1>Lista de familias de la comunidad <%=current_user.profile.family.comunity.nombre%></h1>
+<%end%>
+<script type="text/javascript">
+   $(document).ready(function() {
+  $(".eliminar").append(" <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>")
+  $(".mostrar").append(" <span class='glyphicon glyphicon-check' aria-hidden='true'></span>")
+  $(".editar").append(" <span class='glyphicon glyphicon-edit' aria-hidden='true'></span>")
+});
+</script>
+  <div class="row">
+    <% @families.each do |family| %>
+      <% if (session[:type_user]=="SimpleUser" and current_user.profile.family.id==family.id ) or 
+            (session[:type_user]=="Miembro" and current_user.profile.member.comunity.id==family.comunity.id) or
+            (session[:type_user]=="Administrador")%>
+        
+        <div class="col-sm-6 col-md-3" >
+          <div class="thumbnail">
+            <div  class="pointer" onclick="window.location.href='<%=particles_path(family.slug)%>'" title="Ver integrantes">
+              <div class="container-center avatar">
+                 <%= image_tag "/photo_store/casadefault.jpg", class: "avatar"%>
+              </div>
+            </div>
+            <div class="caption">
+              <h3><%= family.nombre_casa%>-<%= family.numero_casa%></h3>
+              <p>Cantidad de integrantes: <%= family.profiles.length%></p>
+              <p>Niños: <%= family.kids.length%> | Adultos: <%= family.adults.length%></p>
+              <p>
+                <%= link_to 'Ver', family, class: "btn btn-info mostrar", role: "button"%>
+                <% if session[:type_user]!="SimpleUser"%>
+                  <%= link_to 'Editar', edit_family_path(family),class: "btn btn-info editar", role: "button" %>
+                  <%= link_to 'Borrar', family, method: :delete, data: { confirm: '¿Estas seguro/a?' },class: "btn btn-danger eliminar", role: "button"%>
+                <%end%>
+              </p>
+            </div>
+          </div>
+        </div>
+      <%end%>
+    <% end %>
+  </div>
+
+
+<br>
+
+<% if session[:type_user]!="SimpleUser"%>
+  <%= link_to 'Nueva Familia', new_family_path, class: "btn btn-primary", role: "button"%>
+
+<%end%>

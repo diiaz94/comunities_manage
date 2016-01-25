@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre casa:</strong>
+  <%= @family.nombre_casa %>
+</p>
+
+<p>
+  <strong>Numero casa:</strong>
+  <%= @family.numero_casa %>
+</p>
+
+<p>
+  <strong>Telefono:</strong>
+  <%= @family.telefono %>
+</p>
+
+<p>
+  <strong>Comunidad:</strong>
+  <%= @family.comunity.nombre %>
+</p>
+
+<p>
+  <strong>Direccion:</strong>
+  <%= @family.direccion %>
+</p>
+
+
+<%= link_to 'Editar', edit_family_path(@family) %> |
+<%= link_to 'Regresar', families_path %>

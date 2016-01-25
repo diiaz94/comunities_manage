@@ -1,0 +1,131 @@
+
+<div id="notice" class="alert alert-success hidden" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only"></span>
+  <span class="cerrar" onclick="$('#notice').hide();">X</span>
+  <%=notice%>
+</div>
+<div id="error" class="alert alert-danger hidden" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  <span class="cerrar" onclick="$('#error').hide();">X</span>
+  <%=alert%>
+</div>
+<div id="warning" class="alert alert-warning " role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only"></span>
+  <span class="glyphicon glyphicon-remove cerrar" onclick="$('#warning').hide();"></span>
+  Recuerde que todos los campos marcados con un asterisco (*) son obligatorios.
+</div>
+<%= form_for(@profile) do |f| %>
+  <% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% @profile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%=f.label :photo, "Avatar"%><br>
+    <%= image_tag @profile.ruta_photo, id: "containerImage", class: "avatar"%><br>
+    <%=f.file_field :photo, accept:"image/jpeg",class: "hidden",onchange: "loadFile(event)"%>
+    <button type="button" style="margin-top:5px;" class="btn btn-default" aria-label="Left Align" onclick="$('input[id=profile_photo]').click();">
+      <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
+      Cargar Imagen &nbsp;
+    </button>
+ </div>
+<script>
+  var loadFile = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('containerImage');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+
+</script>
+    
+  <%if session[:type_user]!="SimpleUser"%>
+  <div class="field">
+    <%= f.label :cedula %>*<br>
+    <%= f.text_field :cedula, type:"number",required: "true",title: "Este campo no puede estar vacio" %>
+  </div>
+  <%else%>
+  <p>
+    <strong>Cedula:</strong>
+      <%= @profile.cedula_format %>
+  </p>
+
+  <%end%>
+  <div class="field move-left">
+    <%= f.label :primer_nombre %>*<br>
+    <%= f.text_field :primer_nombre,required: "true",title: "Este campo no puede estar vacio" %>
+  </div>
+  <div class="field move-right">
+    <%= f.label :segundo_nombre %><br>
+    <%= f.text_field :segundo_nombre %>
+  </div>
+  <div class="field move-left">
+    <%= f.label :primer_apellido %>*<br>
+    <%= f.text_field :primer_apellido,required: "true",title: "Este campo no puede estar vacio" %>
+  </div> 
+  <div class="field move-right">
+    <%= f.label :segundo_apellido %><br>
+    <%= f.text_field :segundo_apellido%>
+  </div>
+  <div class="field">
+    <%= f.label :email %>*<br>
+    <%= f.text_field :email, type:"email",required: "true",title: "Este campo no puede estar vacio" %> 
+  </div>
+  <div class="field">
+    <%= f.label :telefono %>*<br>
+    <%= f.text_field :telefono, type:"number",required: "true",title: "Este campo no puede estar vacio"%> 
+  </div>
+  <div class="field">
+    <%= f.label :fecha_nac, "Fecha de nacimiento" %>*<br>
+    <%= f.date_select :fecha_nac,  :order => [:day, :month, :year], :start_year => Date.today.year-100, :end_year => Date.today.year,:date_separator =>"- ", prompt: { day: 'Seleccciona el dia', month: 'Seleccione el mes', year: 'Seleccione el año' },:use_month_names => ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],required: "true",title: "Este campo no puede estar vacio" %>
+  </div>
+  <%if session[:type_user]!="SimpleUser"%>
+    <div class="field">
+      <%= f.label :family_id, "Seleccione la quinta de la familia" %>*<br>
+      <%if @profile.family%>
+        <%= f.select :family_id, options_for_select(@families,@profile.family_id)%>
+      <%else%>
+         <%= f.select :family_id, options_for_select(@families)%>
+      <%end%>
+    </div>
+    <div class="field">
+      <%= f.label :fecha_ing, "Fecha de ingreso a la comunidad" %>*<br>
+      <%= f.date_select :fecha_ing,  :order => [:day, :month, :year], :start_year => Date.today.year-100, :end_year => Date.today.year,:date_separator =>"- ", prompt: { day: 'Seleccciona el dia', month: 'Seleccione el mes', year: 'Seleccione el año' },:use_month_names => ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],required: "true",title: "Este campo no puede estar vacio" %>
+    </div>
+  <%end%>
+ <br>
+  <div class="actions">
+    <button type="button" class="btn btn-danger" aria-label="Left Align" onclick="window.location.href='/profiles'">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      Regresar &nbsp;
+    </button>
+
+    <button type="submit" class="btn btn-primary" aria-label="Left Align">
+      <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+      Guardar &nbsp;
+    </button>
+  </div>
+
+<% end %>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+

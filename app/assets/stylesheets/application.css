@@ -1,0 +1,243 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+.hidden{
+	display:none!important;
+}
+.pointer{
+  cursor: pointer;
+}
+input[type=number]::-webkit-outer-spin-button,
+
+input[type=number]::-webkit-inner-spin-button {
+
+    -webkit-appearance: none;
+
+    margin: 0;
+
+}
+
+.divider{
+  height: 2px;
+}
+input[type=number] {
+
+    -moz-appearance:textfield;
+
+}
+input[type=radio],input[type=checkbox] {
+
+    cursor: pointer;
+
+}
+
+.alert{
+  margin-top: 20px;
+  width: 50%;
+}
+.cerrar{
+
+float: right;
+ font-weight: 800; 
+ cursor: pointer; 
+}
+
+.avatar{
+	width: 100px;
+  height: 110px !important;
+}
+
+select{
+	background: #eee url(arrow.png);
+	background-position: 95%;
+	background-size: 15px;
+    background-repeat: no-repeat;
+   	padding: 5px;
+   	padding-right: 20px;
+   	border: 0;
+   	border-radius: 3px;
+   -webkit-appearance: none;
+   transition: all 0.4s;
+   -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+select:hover{
+	background-color: #ddd;
+}
+
+.btn{
+  font-size: 12px;
+}
+
+.pdf-style{
+  width: 680px;
+  line-height: 2.5;
+  padding-left: 35px;
+  padding-right: 35px;
+  margin-top: 70px;
+}
+.encabezado-align{
+  text-align: center; 
+}
+.encabezado-fontsize{
+  font-size: 16px;
+}
+
+.container-center{
+  margin: 0 auto;
+  } 
+.container-middle{
+  width: 50%;
+}
+.text-center{
+  text-align: center;
+}
+.text-justify{
+  text-align: justify;
+}
+.text-left{
+  text-align: left;
+}
+.text-right{
+  text-align: right;
+}
+.title-fontsize{
+  font-size: 21px;
+}
+.upper-case{
+  text-transform: uppercase;
+}
+.cuerpo-align{
+  text-align: justify;
+}
+.cuerpo-fontsize{
+  font-size: 12px;
+}
+.cuerpo-weigth{
+  font-weight: 600;
+}
+
+
+.move-left{
+  float: left;
+  width: 20%;
+}
+.move-right{
+  float: right;
+  width: 80%;
+}
+
+.text-red{
+  color:red!important;
+}
+.text-green{
+  color:green !important;
+}
+
+.float-left{
+  float:left;
+}
+
+.float-right{
+  float:right;
+}
+
+
+
+.modalmask {
+    position: absolute;
+    font-family: Arial, sans-serif;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+.modalmask:target {
+    opacity:1;
+    pointer-events: auto;
+}
+
+
+.modalbox{
+    width: 800px;
+    position: relative;
+    padding: 5px 20px 13px 20px;
+    background: #fff;
+    border-radius:3px;
+    -webkit-transition: all 500ms ease-in;
+    -moz-transition: all 500ms ease-in;
+    transition: all 500ms ease-in;
+     
+}
+
+
+.movedown {
+    margin: 0 auto;
+}
+.rotate {
+    margin: 10% auto;
+    -webkit-transform: scale(-5,-5);
+    transform: scale(-5,-5);
+}
+.resize {
+    margin: 10% auto;
+    width:0;
+    height:0;
+ 
+}
+.modalmask:target .movedown{       
+    margin:10% auto;
+}
+.modalmask:target .rotate{     
+    transform: rotate(360deg) scale(1,1);
+        -webkit-transform: rotate(360deg) scale(1,1);
+}
+ 
+.modalmask:target .resize{
+    width:400px;
+    height:200px;
+}
+
+
+
+
+.close {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: 1px;
+    text-align: center;
+    top: 1px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius:3px;
+ 
+}
+ 
+.close:hover {
+    background: #FAAC58;
+    color:#222;
+}
+
+
+

@@ -1,0 +1,24 @@
+<h1>Lista de comunidades</h1>
+
+<br>
+
+  <div id="view1" class="row">
+    <% @comunities.each do |comunity| %>
+        <div class="col-sm-6 col-md-3">
+          <div class="thumbnail">
+            <%= image_tag "/photo_store/comunidaddefault.jpg", class: "avatar"%>
+            <div class="caption">
+              <h3><%= comunity.nombre %></h3>
+              <p >Parroquia: <%= comunity.parish.nombre%></p>
+              <p>
+                <%= link_to 'Mostrar', comunity, class: "btn btn-primary", role: "button"%>
+                <%= link_to 'Editar', edit_comunity_path(comunity),class: "btn btn-primary", role: "button" %>
+                <%= link_to 'Eliminar', comunity, method: :delete, data: { confirm: '¿Estas seguro/a?' },class: "btn btn-primary", role: "button"%>
+              </p>
+            </div>
+          </div>
+        </div>
+    <%end %>
+  </div>
+
+<%= link_to 'Nueva Comunidad', new_comunity_path %>

@@ -1,0 +1,92 @@
+<% if session[:type_user]=="Administrador"%>
+  <h1>Lista de perfiles</h1>
+<%end%>
+<% if session[:type_user]=="Miembro"%>
+  <h1>Lista de perfiles de la comunidad <%=current_user.profile.family.comunity.nombre%></h1>
+<%end%>
+<% if session[:type_user]=="SimpleUser"%>
+  <h1>Integrantes de mi familia</h1>
+<%end%>
+<script type="text/javascript">
+   $(document).ready(function() {
+  $(".eliminar").append(" <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>")
+  $(".mostrar").append(" <span class='glyphicon glyphicon-check' aria-hidden='true'></span>")
+  $(".editar").append(" <span class='glyphicon glyphicon-edit' aria-hidden='true'></span>")
+});
+</script>
+<% if session[:type_user]!="SimpleUser"%>
+  <div style="width:100%;">
+    <div class="field">
+      <label for="viewtype">Vista:</label><br>
+      <select id="viewtype" name="viewtype" onchange="javascript: onChangeView();">
+        <option value="1">Normal</option>
+        <option value="2">Por quinta</option>
+      </select>
+    </div>
+
+  </div>
+<%end%>
+  <div id="view1" class="row">
+    <% count = 0 %>
+    <% @profiles.each do |profile| %>
+      <% if (session[:type_user]=="SimpleUser" and current_user.profile.family.id==profile.family.id ) or 
+            (session[:type_user]=="Miembro" and current_user.profile.member.comunity.id==profile.family.comunity.id) or
+            (session[:type_user]=="Administrador")%>
+        
+        <div class="col-sm-6 col-md-3">
+          <div class="thumbnail">
+            <%= image_tag profile.ruta_photo, class: "avatar"%>
+            <div class="caption">
+              <h3><%= profile.primer_nombre %> <%= profile.primer_apellido %></h3>
+              <p>Email: <%= profile.email_mask %></p>
+              <p>Edad: <%= profile.edad %></p>
+              <p class=<%="infofamily-#{count.to_s}"%>>Quinta: <%= profile.family.nombre_casa %></p>
+              <p>
+                <%= link_to 'Ver', profile, class: "btn btn-info mostrar", role: "button"%>
+                <% if session[:type_user]!="SimpleUser"%>
+                  <%= link_to 'Editar', edit_profile_path(profile),class: "btn btn-info editar", role: "button" %>
+                  <%= link_to 'Borrar', profile, method: :delete, data: { confirm: '¿Estas seguro/a?' },class: "btn btn-danger eliminar", role: "button"%>
+                <%end%>
+              </p>
+            </div>
+          </div>
+        </div>
+        <% count=count+1 %>
+      <%end%>
+    <% end %>
+  </div> 
+
+<br>
+
+
+<div id="view2" class="row">
+</div>
+<div class="hidden">
+  <div id="templatefamily" class="col-sm-6 col-md-12">
+    <div class="thumbnail">
+      <div class="caption">
+          <h3 class="title">Titulo</h3>
+      </div>
+      <div class="row">
+          
+      </div>
+              
+    </div>
+  </div>
+</div>
+
+<% if session[:type_user]!="SimpleUser"%>
+  <%= link_to 'Nuevo Perfil', new_profile_path, class: "btn btn-primary", role: "button"%>
+
+<%end%>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

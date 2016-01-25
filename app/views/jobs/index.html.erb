@@ -1,0 +1,27 @@
+<h1>Lista de roles</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @jobs.each do |job| %>
+      <tr class="info">
+        <td><%= job.nombre %></td>
+        <td><%= job.descripcion %></td>
+        <td><%= link_to 'Mostrar', job %></td>
+        <td><%= link_to 'Editar', edit_job_path(job) %></td>
+        <td><%= link_to 'Eliminar', job, method: :delete, data: { confirm: '¿Estas seguro/a?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo rol', new_job_path %>

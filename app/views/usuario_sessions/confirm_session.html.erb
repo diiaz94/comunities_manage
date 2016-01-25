@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Solicitudes</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div class="text-center">
+		<h1>Bienvenido <%=current_user.profile.primer_nombre%> <%=current_user.profile.primer_apellido%>  </h1>	
+		<hr>
+		<h3> Usted posee dos roles, ¿Con cual de ellos desea ingresar al sistema? </h3>
+
+		<div class="container-center container-middle text-justify">
+			<%= form_tag culminate_path,class: "content-center", method: :post do %>
+				<p id="notice"><%= notice %></p>
+				<%if @confirm == "admin" %>
+					<div class="field row">
+						<div class="col-sm-8 col-md-8">
+							<%= label_tag "Administrador" %>
+						</div>
+						<div class="col-sm-4 col-md-4">
+							<%=radio_button_tag 'opcion', '1'%>
+						</div>
+					</div>					
+				<%else%>
+					<div class="field row">
+						<div class="col-sm-8 col-md-8">
+							<%= label_tag "#{current_user.profile.member.job.nombre} de la comunidad #{current_user.profile.member.comunity.nombre}" %>
+						</div>
+						<div class="col-sm-4 col-md-4">
+							<%=radio_button_tag 'opcion', '2'%>
+						</div>
+					</div>
+				<%end%>
+				<div class="field row">
+					<div class="col-sm-8 col-md-8">
+					<%= label_tag "Integrante de la familia que reside en la quinta #{current_user.profile.family.nombre_casa}" %>
+					</div>
+					<div class="col-sm-4 col-md-4">
+						<%=radio_button_tag 'opcion', '3'%>
+					</div>
+				</div>  
+
+				<div class="row">
+					<div class="col-sm-4 col-md-4 container-center">
+					</div>
+					<div class="col-sm-4 col-md-2 container-center">
+						    <button type="submit" class="btn btn-primary" aria-label="Left Align">
+						      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						      Enviar &nbsp;
+						    </button>
+					</div>
+					<div class="col-sm-4 col-md-6 container-center">
+					</div>
+				</div>
+			<% end %>
+		</div>
+
+</body>

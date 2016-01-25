@@ -1,0 +1,36 @@
+<%= form_for(@type_request) do |f| %>
+  <% if @type_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@type_request.errors.count, "error") %> prohibited this type_request from being saved:</h2>
+
+      <ul>
+      <% @type_request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+
+ <div class="field hidden">
+    <textarea id="mytext" onkeyup="myFunction()" style="margin: 0px; height: 219px; width: 925px;"><strong> HOLA </strong>
+
+    </textarea>
+
+  </div>
+
+
+  <div class="field">
+    <%= f.label :formato %><br>
+    <%= f.text_area :formato, style: "margin: 0px; height: 219px; width: 925px;" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
+

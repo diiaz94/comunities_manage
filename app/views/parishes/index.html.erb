@@ -1,0 +1,27 @@
+<h1>Lista de parroquias</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Municipio</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @parishes.each do |parish| %>
+      <tr class="info">
+        <td><%= parish.nombre %></td>
+        <td><%= parish.town.nombre %></td>
+        <td><%= link_to 'Mostrar', parish %></td>
+        <td><%= link_to 'Editar', edit_parish_path(parish) %></td>
+        <td><%= link_to 'Eliminar', parish, method: :delete, data: { confirm: '¿Estas seguro/a?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nueva parroquia', new_parish_path %>

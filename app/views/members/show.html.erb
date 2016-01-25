@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cedula:</strong>
+  <%= @member.profile.cedula %>
+</p>
+<p>
+  <strong>Nombre:</strong>
+  <%= @member.profile.primer_nombre+" "+@member.profile.primer_apellido %>
+</p>
+<p>
+  <strong>Rol:</strong>
+  <%= @member.job.nombre %>
+</p>
+<p>
+  <strong>Comunidad:</strong>
+  <%= @member.comunity.nombre %>
+</p>
+
+<%= link_to 'Editar', edit_member_path(@member) %> |
+<%= link_to 'Regresar', members_path %>

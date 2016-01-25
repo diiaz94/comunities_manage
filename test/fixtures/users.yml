@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cedula: MyString
+  crypted_password: MyString
+  salt: MyString
+  slug: MyString
+  type_id: 1
+  persona_id: 1
+
+two:
+  cedula: MyString
+  crypted_password: MyString
+  salt: MyString
+  slug: MyString
+  type_id: 1
+  persona_id: 1

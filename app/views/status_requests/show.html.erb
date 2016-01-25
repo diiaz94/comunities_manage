@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @status_request.nombre %>
+</p>
+
+<%= link_to 'Editar', edit_status_request_path(@status_request) %> |
+<%= link_to 'Regresar', status_requests_path %>

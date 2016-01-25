@@ -1,0 +1,90 @@
+
+<%if @profiles.length==0 && @families.length==0%>
+	<div class="alert alert-danger" role="alert">
+	  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	  <span class="sr-only">Atencion:</span>
+	  Disculpe, no se encontraron resultados. Intente con otra busqueda.
+	</div>
+<%end%>
+<%if @families.length>0%>
+	<div class="row">
+		<div class="col-sm-6 col-md-12" style="position:initial;">
+			<div class="thumbnail">
+				<div class="caption">
+	          		<h3 class="title">Familias</h3>
+	     		 </div>
+	  			<div class="row">
+				<% @families.each do |family| %>
+				      <% if (session[:type_user]=="SimpleUser" and current_user.profile.family.id==family.id ) or 
+				            (session[:type_user]=="Miembro" and current_user.profile.member.comunity.id==family.comunity.id) or
+				            (session[:type_user]=="Administrador")%>
+				        
+				        <div class="col-sm-6 col-md-3" >
+				          <div class="thumbnail">
+				            <div  class="pointer" onclick="window.location.href='<%=particles_path(family.slug)%>'" title="Ver integrantes">
+				              <div class="container-center avatar">
+				                 <%= image_tag "/photo_store/casadefault.jpg", class: "avatar"%>
+				              </div>
+				            </div>
+				            <div class="caption">
+				              <h3><%= family.nombre_casa%>-<%= family.numero_casa%></h3>
+				              <p>Cantidad de integrantes: <%= family.profiles.length%></p>
+				              <p>
+				                <%= link_to 'Mostrar', family, class: "btn btn-primary", role: "button"%>
+				                <% if session[:type_user]!="SimpleUser"%>
+				                  <%= link_to 'Editar', edit_family_path(family),class: "btn btn-primary", role: "button" %>
+				                  <%= link_to 'Eliminar', family, method: :delete, data: { confirm: '¿Estas seguro/a?' },class: "btn btn-primary", role: "button"%>
+				                <%end%>
+				              </p>
+				            </div>
+				          </div>
+				        </div>
+				      <%end%>
+				    <% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+<%end%>
+<%if @profiles.length>0%>
+	<div class="row">
+		<div class="col-sm-6 col-md-12" style="position:initial;">
+			<div class="thumbnail">
+				<div class="caption">
+	          		<h3 class="title">Perfiles</h3>
+	     		 </div>
+	  			<div class="row">
+	  				<% count = 0 %>
+					<% @profiles.each do |profile| %>
+					    <% if (session[:type_user]=="SimpleUser" and current_user.profile.family.id==profile.family.id ) or 
+					            (session[:type_user]=="Miembro" and current_user.profile.member.comunity.id==profile.family.comunity.id) or
+					            (session[:type_user]=="Administrador")%>
+		        
+					        <div class="col-sm-6 col-md-3">
+					          <div class="thumbnail">
+					            <%= image_tag profile.ruta_photo, class: "avatar"%>
+					            <div class="caption">
+					              <h3><%= profile.primer_nombre %> <%= profile.primer_apellido %></h3>
+					              <p>Email: <%= profile.email_mask %></p>
+					              <p class=<%="infofamily-#{count.to_s}"%>>Quinta: <%= profile.family.nombre_casa %></p>
+					              <p>
+					                <%= link_to 'Mostrar', profile, class: "btn btn-primary", role: "button"%>
+					                <% if session[:type_user]!="SimpleUser"%>
+					                  <%= link_to 'Editar', edit_profile_path(profile),class: "btn btn-primary", role: "button" %>
+					                  <%= link_to 'Eliminar', profile, method: :delete, data: { confirm: '¿Estas seguro/a?' },class: "btn btn-primary", role: "button"%>
+					                <%end%>
+					              </p>
+					            </div>
+					          </div>
+			        		</div>
+			        		<% count=count+1 %>
+		      			<%end%>
+	    			<%end%>
+
+				</div>
+			</div>
+		</div>
+	</div>
+<%end%>
+
+

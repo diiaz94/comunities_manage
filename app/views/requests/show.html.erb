@@ -1,0 +1,40 @@
+<div id="notice" class="alert alert-success hidden" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only"></span>
+  <%=notice%>
+<span class="cerrar" onclick="$('#notice').hide();">X</span>
+</div>
+<div style="width:650px;margin:0 auto;">
+	<div class="pdf-style">
+		<%=ERB.new(@request.type_request.formato.gsub(/^  /, ''), 0, "%<>").result(binding).html_safe%>
+	</div>
+</div>
+<br><br>
+<div class="container-middle container-center">  
+	<div class="container-middle container-middle float-left">
+		<div style="width: 100px; margin: 0 auto;">
+			<button type="button" class="btn btn-warning " aria-label="Left Align" onclick="window.location.href='<%=requests_path%>'">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				Regresar&nbsp;
+			</button>
+		</div>
+	</div>
+	<div class="container-middle container-middle float-right">
+		<div style="width: 130px; margin: 0 auto;">
+			<button type="button" class="btn btn-primary" aria-label="Left Align" onclick="PDFprueba();">
+				<span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+				Descargar PDF&nbsp;
+			</button>
+		</div>
+	</div>	
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

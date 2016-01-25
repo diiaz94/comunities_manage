@@ -1,0 +1,38 @@
+<h1>Lista de tipos de solicitudes</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Formato</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @type_requests.each do |type_request| %>
+      <tr class="info">
+        <td><%= type_request.nombre %></td>
+        <td><%= link_to 'Ver Formato', "#modal-#{type_request.id}" %></td>
+        <td><%= link_to 'Mostrar', type_request %></td>
+        <td><%= link_to 'Editar', edit_type_request_path(type_request) %></td>
+        <td><%= link_to 'Eliminar', type_request, method: :delete, data: { confirm: '¿Estas seguro/a?' } %></td>
+      </tr>
+    <% end %>
+  </tbody >
+</table>
+
+<br>
+    <% @type_requests.each do |type_request| %>
+      <div id="modal-<%=type_request.id%>" class="modalmask">
+          <div class="modalbox movedown">
+              <a href="#close" title="Close" class="close">X</a>
+              <h2><%=type_request.nombre%></h2>
+              <div>
+                <%=type_request.formato.html_safe%></h2>
+              </div>
+          </div>
+      </div>
+    <% end %>
+
+<%= link_to 'Nuevo tipo de solicitud', new_type_request_path %>

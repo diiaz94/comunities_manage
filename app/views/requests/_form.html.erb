@@ -1,0 +1,55 @@
+<%= form_for(@request) do |f| %>
+  <% if @request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+
+      <ul>
+      <% @request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label :profile_id, "Seleccione el usuario involucrado" %><br>
+    <%if @request.profile%>
+      <%= f.select :profile_id, options_for_select(@profiles.pluck(:cedula,:id),@request.profile.cedula)%>
+    <%else%>
+      <%= f.select :profile_id, options_for_select(@profiles.pluck(:cedula,:id))%>
+    <%end%>
+  </div>
+
+  <div class="field">
+    <%= f.label :comunity_id, "Seleccione la comunidad involucrada" %><br>
+    <%if @request.comunity%>
+      <%= f.select :comunity_id, options_for_select(@comunities.pluck(:nombre,:id),@request.comunity.nombre)%>
+    <%else%>
+      <%= f.select :comunity_id, options_for_select(@comunities.pluck(:nombre,:id))%>
+    <%end%>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :type_request_id, "Seleccione el tipo de solicitud" %><br>
+    <%if @request.comunity%>
+      <%= f.select :type_request_id, options_for_select(@types_requests.pluck(:nombre,:id),@request.type_request.nombre)%>
+    <%else%>
+      <%= f.select :type_request_id, options_for_select(@types_requests.pluck(:nombre,:id))%>
+    <%end%>
+  </div>
+
+  <div class="field">
+    <%= f.label :status_request_id, "Seleccione el status solicitud" %><br>
+    <%if @request.comunity%>
+      <%= f.select :status_request_id, options_for_select(@status_requests.pluck(:nombre,:id),@request.status_request.nombre)%>
+    <%else%>
+      <%= f.select :status_request_id, options_for_select(@status_requests.pluck(:nombre,:id))%>
+    <%end%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

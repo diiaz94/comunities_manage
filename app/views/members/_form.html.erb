@@ -1,0 +1,44 @@
+<%= form_for(@member) do |f| %>
+  <% if @member.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h2>
+
+      <ul>
+      <% @member.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :profile_id, "Seleccione la cedula del miembro" %><br>
+    <select id="profile_id" name="member[profile_id]" onchange="javascript: onChangeType();">
+    <% @profiles.each do |p| %>
+      <option value=<%="#{p.id}"%> ><%=p.cedula+" - "+p.primer_nombre+" "+p.primer_apellido%></option>
+    <% end %>
+    </select>
+  </div>
+
+  <div class="field">
+    <%= f.label :job_id, "Seleccione el rol del miembro" %><br>
+    <select id="job_id" name="member[job_id]" onchange="javascript: onChangeType();">
+    <% @jobs.each do |j| %>
+      <option value=<%="#{j.id}"%> ><%=j.nombre%></option>
+    <% end %>
+    </select>
+  </div>
+
+  <div class="field">
+    <%= f.label :comunity_id, "Seleccione la comunidad para el miembro" %><br>
+    <select id="comunity_id" name="member[comunity_id]" onchange="javascript: onChangeType();">
+    <% @comunities.each do |c| %>
+      <option value=<%="#{c.id}"%> ><%=c.nombre%></option>
+    <% end %>
+    </select>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

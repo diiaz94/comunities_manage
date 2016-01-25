@@ -1,0 +1,53 @@
+
+ <h1>Lista de perfiles de la familia que reside en la Quinta: <br> <%=@family.nombre_casa%>-<%=@family.numero_casa%></h1>
+<script type="text/javascript">
+   $(document).ready(function() {
+  $(".eliminar").append(" <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>")
+  $(".mostrar").append(" <span class='glyphicon glyphicon-check' aria-hidden='true'></span>")
+  $(".editar").append(" <span class='glyphicon glyphicon-edit' aria-hidden='true'></span>")
+});
+</script>
+
+  <div id="view1" class="row">
+    <% count = 0 %>
+    <% @profiles.each do |profile| %>
+      <% if (session[:type_user]=="SimpleUser" and current_user.profile.family.id==profile.family.id ) or 
+            (session[:type_user]=="Miembro" and current_user.profile.member.comunity.id==profile.family.comunity.id) or
+            (session[:type_user]=="Administrador")%>
+        
+        <div class="col-sm-6 col-md-3">
+          <div class="thumbnail">
+            <%= image_tag profile.ruta_photo, class: "avatar"%>
+            <div class="caption">
+              <h3><%= profile.primer_nombre %> <%= profile.primer_apellido %></h3>
+              <p>Email: <%= profile.email_mask %></p>
+              <p>Edad: <%= profile.edad %></p>
+              <p class=<%="infofamily-#{count.to_s}"%>>Quinta: <%= profile.family.nombre_casa %></p>
+              <p>
+                <%= link_to 'Ver', profile, class: "btn btn-info mostrar", role: "button"%>
+                <% if session[:type_user]!="SimpleUser"%>
+                  <%= link_to 'Editar', edit_profile_path(profile),class: "btn btn-info editar", role: "button" %>
+                  <%= link_to 'Borrar', profile, method: :delete, data: { confirm: '¿Estas seguro/a?' },class: "btn btn-danger eliminar", role: "button"%>
+                <%end%>
+              </p>
+            </div>
+          </div>
+        </div>
+        <% count=count+1 %>
+      <%end%>
+    <% end %>
+  </div> 
+
+      <button type="button" class="btn btn-warning" aria-label="Left Align" onclick="window.location.href='/profiles'">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      Regresar &nbsp;
+    </button>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>

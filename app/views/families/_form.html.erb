@@ -1,0 +1,54 @@
+<%= form_for(@family) do |f| %>
+  <% if @family.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@family.errors.count, "error") %> prohibited this family from being saved:</h2>
+
+      <ul>
+      <% @family.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre_casa,"Nombre de la quinta" %><br>
+    <%= f.text_field :nombre_casa %>
+  </div>
+  <div class="field">
+    <%= f.label :numero_casa, "Numero de la quinta" %><br>
+    <%= f.text_field :numero_casa, type:"number" %>
+  </div>
+  <div class="field">
+    <%= f.label :telefono %><br>
+    <%= f.text_field :telefono, type:"number" %>
+  </div>
+  <div class="field">
+    <%= f.label :comunity_id, "Comunidad" %><br>
+    <select id="comunity_id" name="family[comunity_id]" onchange="javascript: onChangeType();">
+    <% @comunities.each do |c| %>
+    <%if session[:type_user]=="Administrador" or
+         (session[:type_user]=="Miembro" and current_user.profile.member.comunity.id==c.id and current_user.profile.family.comunity.id==c.id)%>
+       <option value=<%="#{c.id}"%> ><%=c.nombre%></option>
+    <%end%>
+    <% end %> 
+    </select>
+  </div>
+  <div class="field">
+    <%= f.label :direccion %><br>
+    <%= f.text_area :direccion %>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn btn-danger" aria-label="Left Align" onclick="window.location.href='/families'">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      Regresar &nbsp;
+    </button>
+
+    <button type="submit" class="btn btn-primary" aria-label="Left Align">
+      <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+      Guardar &nbsp;
+    </button>
+  </div>
+
+<% end %>

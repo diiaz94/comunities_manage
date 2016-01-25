@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @parish.nombre %>
+</p>
+<p>
+  <strong>Municipio:</strong>
+  <%= @parish.town.nombre %>
+</p>
+
+<%= link_to 'Editar', edit_parish_path(@parish) %> |
+<%= link_to 'Regresar', parishes_path %>

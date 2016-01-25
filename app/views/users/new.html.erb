@@ -1,0 +1,12 @@
+<%if current_user%>
+	<h1>Nuevo Usuario</h1>
+<%else%>
+	<h1>Registra tu usuario</h1>
+<%end%>
+
+<%= render 'form' %>
+
+
+<%if current_user%>
+	<%= link_to 'Regresar', users_path %>
+<%end%>

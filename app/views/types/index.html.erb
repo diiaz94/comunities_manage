@@ -1,0 +1,27 @@
+<h1>Lista de tipos de usuario</h1>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @types.each do |type| %>
+      <tr class='info'>
+        <td><%= type.nombre %></td>
+        <td><%= type.descripcion %></td>
+        <td><%= link_to 'Mostrar', type %></td>
+        <td><%= link_to 'Editar', edit_type_path(type) %></td>
+        <td><%= link_to 'Eliminar', type, method: :delete, data: { confirm: 'Esta seguro/a?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo tipo de usuario', new_type_path %>

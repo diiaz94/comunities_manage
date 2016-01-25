@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @town.nombre %>
+</p>
+<p>
+  <strong>Estado:</strong>
+  <%= @town.state.nombre %>
+</p>
+
+<%= link_to 'Editar', edit_town_path(@town) %> |
+<%= link_to 'Regresar', towns_path %>
