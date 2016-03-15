@@ -1,0 +1,26 @@
+<p>
+Es necesario que al menos exista un usuario Admnistrador en el sistema.
+
+</p>
+
+<br>
+<br>
+<p id="notice"><%= notice %></p>  
+<%= form_for @user, url: {action: "create"} do |f| %>
+  <div class="field">
+    <%= f.label :cedula %><br>
+    <%= f.text_field :cedula, type:"number"%>
+  </div>
+
+   <div class="field">
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </div>
+   <div class="field">
+    <label for="password_confirmation">Confirma el password</label><br>
+    <input id="password_confirmation" name="password_confirmation" type="password">
+  </div>
+  <div class="actions">
+        <%= f.submit "Crear Usuario", class: "btn btn-info"%>
+  </div>
+<%end%>

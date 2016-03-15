@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   post 'culminate' => 'usuario_sessions#culminate_login', as: :culminate
   get 'particles/:id' => 'profiles#set_particles_profiles', as: :particles
   get 'buscar' => 'searches', as: :buscar
+  post 'create' => 'welcome#create', as: :create
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
