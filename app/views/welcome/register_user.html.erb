@@ -1,0 +1,45 @@
+<br>
+<br>
+<p>
+Es necesario que al menos exista un usuario Administrador en el sistema.
+
+</p>
+
+<br>
+<br>
+<div id="notice" class="alert alert-success hidden" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only"></span>
+  <span class="cerrar" onclick="$('#notice').hide();">X</span>
+  <%=notice%>
+</div>
+<div id="error" class="alert alert-danger hidden" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  <span class="cerrar" onclick="$('#error').hide();">X</span>
+  <%=alert%>
+</div>
+<div id="warning" class="alert alert-warning " role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only"></span>
+  <span class="glyphicon glyphicon-remove cerrar" onclick="$('#warning').hide();"></span>
+  Recuerde que todos los campos marcados con un asterisco (*) son obligatorios.
+</div>
+<%= form_for @user, url: {action: "create_admin_user"} do |f| %>
+  <div class="field">
+    <%= f.label :cedula %><br>
+    <%= f.text_field :cedula, type:"number"%>
+  </div>
+
+   <div class="field">
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </div>
+   <div class="field">
+    <label for="password_confirmation">Confirma el password</label><br>
+    <input id="password_confirmation" name="password_confirmation" type="password">
+  </div>
+  <div class="actions">
+        <%= f.submit "Crear Usuario", class: "btn btn-info"%>
+  </div>
+<%end%>

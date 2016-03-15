@@ -1,0 +1,71 @@
+<br>
+<br>
+<p>
+Es necesario que al menos exista un usuario Administrador en el sistema.
+
+</p>
+
+<br>
+<br>
+
+<div id="notice" class="alert alert-success hidden" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only"></span>
+  <span class="cerrar" onclick="$('#notice').hide();">X</span>
+  <%=notice%>
+</div>
+<div id="error" class="alert alert-danger hidden" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  <span class="cerrar" onclick="$('#error').hide();">X</span>
+  <%=alert%>
+</div>
+<div id="warning" class="alert alert-warning " role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only"></span>
+  <span class="glyphicon glyphicon-remove cerrar" onclick="$('#warning').hide();"></span>
+  Recuerde que todos los campos marcados con un asterisco (*) son obligatorios.
+</div>
+<%= form_for @profile,url: {action: "create_admin_profile"} do |f| %>
+
+  <div class="field">
+    <%= f.label :cedula %>*<br>
+    <%= f.text_field :cedula, type:"number",required: "true",title: "Este campo no puede estar vacio" %>
+  </div>
+  <div class="field move-left">
+    <%= f.label :primer_nombre %>*<br>
+    <%= f.text_field :primer_nombre,required: "true",title: "Este campo no puede estar vacio" %>
+  </div>
+  <div class="field move-right">
+    <%= f.label :segundo_nombre %><br>
+    <%= f.text_field :segundo_nombre %>
+  </div>
+  <div class="field move-left">
+    <%= f.label :primer_apellido %>*<br>
+    <%= f.text_field :primer_apellido,required: "true",title: "Este campo no puede estar vacio" %>
+  </div> 
+  <div class="field move-right">
+    <%= f.label :segundo_apellido %><br>
+    <%= f.text_field :segundo_apellido%>
+  </div>
+  <div class="field">
+    <%= f.label :email %>*<br>
+    <%= f.text_field :email, type:"email",required: "true",title: "Este campo no puede estar vacio" %> 
+  </div>
+  <div class="field">
+    <%= f.label :telefono %>*<br>
+    <%= f.text_field :telefono, type:"number",required: "true",title: "Este campo no puede estar vacio"%> 
+  </div>
+  <div class="field">
+    <%= f.label :fecha_nac, "Fecha de nacimiento" %>*<br>
+    <%= f.date_select :fecha_nac,  :order => [:day, :month, :year], :start_year => Date.today.year-100, :end_year => Date.today.year,:date_separator =>"- ", prompt: { day: 'Seleccciona el dia', month: 'Seleccione el mes', year: 'Seleccione el año' },:use_month_names => ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],required: "true",title: "Este campo no puede estar vacio" %>
+  </div>
+ <br>
+  <div class="actions">
+
+    <button type="submit" class="btn btn-primary" aria-label="Left Align">
+      <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+      Guardar &nbsp;
+    </button>
+  </div>
+  <% end %>

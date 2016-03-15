@@ -40,7 +40,9 @@
               <h3><%= profile.primer_nombre %> <%= profile.primer_apellido %></h3>
               <p>Email: <%= profile.email_mask %></p>
               <p>Edad: <%= profile.edad %></p>
-              <p class=<%="infofamily-#{count.to_s}"%>>Quinta: <%= profile.family.nombre_casa %></p>
+              <% if current_user.profile.family != nil%>
+                <p class=<%="infofamily-#{count.to_s}"%>>Quinta: <%= profile.family.nombre_casa %></p>
+              <%end%>
               <p>
                 <%= link_to 'Ver', profile, class: "btn btn-info mostrar", role: "button"%>
                 <% if session[:type_user]!="SimpleUser"%>
