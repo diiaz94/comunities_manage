@@ -8,62 +8,95 @@
 </head>
 <body>
 
+
 <div class = "row" style="margin-top:10px; margin-left:0;margin-right:0">
 	<div class="col-sm-9 col-md-10">
 		<nav style= "display: in-line; margin-top:5%" >
-			<ul class= "navbar-collapse nav nav-tabs">
-				<li><%= link_to 'Inicio', root_path%></li>
-				<%if current_user%>
-					<% if session[:type_user]=="Administrador"%>
-						<li><%= link_to 'Miembros', members_path%></li>
-						<li><%= link_to 'Comunidades', comunities_path%></li>
-						<li><%= link_to 'Familias', families_path%></li>
-						<li><%= link_to 'Perfiles', profiles_path%></li>
-					<%end%>
-					<% if session[:type_user]=="Miembro"%>
-						<li><%= link_to 'Familias', families_path%></li>
-						<li><%= link_to 'Perfiles', profiles_path%></li>
-						<li><%= link_to 'Solicitudes ('+Request.where(comunity_id: current_user.profile.member.comunity_id,status_request_id: StatusRequest.where(nombre: "Pendiente")[0].id).length.to_s+')', requests_path%></li>
+			
+<ul class="nav nav-tabs"> 
+	<li role="presentation" class="activ"><%= link_to 'Inicio', root_path%></li>
+	<%if current_user%>
+		<% if session[:type_user]=="Administrador"%>
+			
+			
 
-					<%end%>
+			<li><%= link_to 'Usuarios', users_path%></li>
+			<li><%= link_to 'Solicitudes', requests_path%></li>
+				
+			<li role="presentation" class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Comunidades 
+				<span class="caret"></span> 
+				</a> 
+				<ul class="dropdown-menu"> 
+					<li><%= link_to 'Ver Comunidades', comunities_path%></li>
+					<li><%= link_to 'Ver Familias', families_path%></li>
+					<li><%= link_to 'Ver Perfiles', profiles_path%></li>
+					<li><%= link_to 'Ver Miembros', members_path%></li>
+				</ul> 
+			</li>
+			<li role="presentation" class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Configuracion 
+				<span class="caret"></span> 
+				</a> 
+				<ul class="dropdown-menu"> 
+					<li><%= link_to 'Tipos de Solicitudes', type_requests_path%></li>
+					<li><%= link_to 'Estados de Solicitudes', status_requests_path%></li>
+					<li><%= link_to 'Tipos de Usuarios', types_path%></li>
+					<li><%= link_to 'Roles', jobs_path%></li>
+					<li><%= link_to 'Estados', states_path%></li>
+					<li><%= link_to 'Municipios', towns_path%></li>
+					<li><%= link_to 'Parroquias', parishes_path%></li>
+				</ul> 
+			</li>
+		<%end%>
 
-					<% if session[:type_user]=="SimpleUser"%>
-						<li><%= link_to 'Mi Familia', profiles_path%></li>
-						<li><%= link_to 'Solicitudes', requests_path%></li>
-					<%end%>
-					
-					<% if session[:type_user]=="Administrador"%>
-						<li><%= link_to 'Solicitudes', requests_path%></li>
-						<li><%= link_to 'Tipos de Solicitudes', type_requests_path%></li>
-						<li><%= link_to 'Estados de Solicitudes', status_requests_path%></li>
-						<li><%= link_to 'Usuarios', users_path%></li>
-						<li><%= link_to 'Tipos de usuarios', types_path%></li>
-						<li><%= link_to 'Roles', jobs_path%></li>
-						<li><%= link_to 'Estados', states_path%></li>
-						<li><%= link_to 'Municipios', towns_path%></li>
-						<li><%= link_to 'Parroquias', parishes_path%></li>
-					<%end%>
+		<% if session[:type_user]=="Miembro"%>
+			<li><%= link_to 'Familias', families_path%></li>
+			<li><%= link_to 'Perfiles', profiles_path%></li>
+			<li><%= link_to 'Solicitudes ('+Request.where(comunity_id: current_user.profile.member.comunity_id,status_request_id: StatusRequest.where(nombre: "Pendiente")[0].id).length.to_s+')', requests_path%></li>
+
+		<%end%>
+
+		<% if session[:type_user]=="SimpleUser"%>
+			<li><%= link_to 'Mi Familia', profiles_path%></li>
+			<li><%= link_to 'Solicitudes', requests_path%></li>
+		<%end%>
+		
+			<li role="presentation" class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Mi Cuenta 
+				<span class="caret"></span> 
+				</a> 
+				<ul class="dropdown-menu"> 
 					<% if current_user.profile%>
 						<li><%= link_to 'Mi perfil', edit_profile_path(current_user.profile)%></li>
 					<%end%>
 					<li><%= link_to 'Cerrar Sesion', logout_path%></li>
-					<form accept-charset="UTF-8" action="/buscar" class="search" id="search" method="get">
-					<div class="col-lg-4 float-right">
-				        <div class="input-group">
-				          <input type="text" name="text" style="height: 31px;"class="form-control" placeholder="Ingresa tu busqueda...">
-				          <span class="input-group-btn">
-				            <button class="btn btn-primary" type="submit">Buscar!</button>
-				          </span>
-				        </div>
-				     </div>
+				</ul> 
+			</li>
 
 
-					</form>
+		
+		<form accept-charset="UTF-8" action="/buscar" class="search" id="search" method="get">
+			<div class="col-lg-4 float-right">
+		        <div class="input-group">
+		          <input type="text" name="text" style="height: 31px;"class="form-control" placeholder="Ingresa tu busqueda...">
+		          <span class="input-group-btn">
+		            <button class="btn btn-primary" type="submit">Buscar!</button>
+		          </span>
+		        </div>
+		     </div>
+		</form>
 
-				<%else%>
-					<li><%= link_to 'Iniciar Sesion', login_path%></li>
-					<li><%= link_to 'Registrate!', new_user_path%></li>
-				<%end%>				
+	<%else%>
+		<li><%= link_to 'Iniciar Sesion', login_path%></li>
+		<li><%= link_to 'Registrate!', new_user_path%></li>
+	<%end%>	
+ 
+</ul>
+
+
+
+
 		</nav>
 	</div>
 	<div class="col-sm-3 col-md-2" style="padding-left:0;padding-right:0">

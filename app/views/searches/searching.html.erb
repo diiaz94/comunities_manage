@@ -27,6 +27,7 @@
 				              </div>
 				            </div>
 				            <div class="caption">
+
 				              <h3><%= family.nombre_casa%>-<%= family.numero_casa%></h3>
 				              <p>Cantidad de integrantes: <%= family.profiles.length%></p>
 				              <p>
@@ -64,16 +65,18 @@
 					          <div class="thumbnail">
 					            <%= image_tag profile.ruta_photo, class: "avatar"%>
 					            <div class="caption">
-					              <h3><%= profile.primer_nombre %> <%= profile.primer_apellido %></h3>
-					              <p>Email: <%= profile.email_mask %></p>
-					              <p class=<%="infofamily-#{count.to_s}"%>>Quinta: <%= profile.family.nombre_casa %></p>
-					              <p>
+					            	<h3><%= profile.primer_nombre %> <%= profile.primer_apellido %></h3>
+					             	<p>Email: <%= profile.email_mask %></p>
+					            	<% if profile.family != nil%>
+                	              		<p class=<%="infofamily-#{count.to_s}"%>>Quinta: <%= profile.family.nombre_casa %></p>
+              						<%end%>
+					            	<p>
 					                <%= link_to 'Mostrar', profile, class: "btn btn-primary", role: "button"%>
 					                <% if session[:type_user]!="SimpleUser"%>
 					                  <%= link_to 'Editar', edit_profile_path(profile),class: "btn btn-primary", role: "button" %>
 					                  <%= link_to 'Eliminar', profile, method: :delete, data: { confirm: '¿Estas seguro/a?' },class: "btn btn-primary", role: "button"%>
 					                <%end%>
-					              </p>
+					              	</p>
 					            </div>
 					          </div>
 			        		</div>
