@@ -55,7 +55,7 @@ class SearchesController < ApplicationController
           end
       end      
     end
-
+    @text = text
     render 'searching'
   end
   # GET /searches/1/edit

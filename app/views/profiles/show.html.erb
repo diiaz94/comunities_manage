@@ -40,14 +40,18 @@
   <strong>Fecha de nacimiento:</strong>
   <%= @profile.mask_date(@profile.fecha_nac.to_s) %>
 </p>
+<% if @profile.family%>
 <p>
   <strong>Quinta:</strong>
   <%= @profile.family.nombre_casa %> - Nro <%= @profile.family.numero_casa_format %>
 </p>
+<% end %>
+<% if @profile.fecha_ing%>
 <p>
   <strong>Fecha de ingreso:</strong>
   <%= @profile.mask_date(@profile.fecha_ing.to_s) %>
 </p>
+<% end %>
 
   <button type="button" class="btn btn-danger" aria-label="Left Align" onclick="window.location.href='<%=profiles_path%>'">
       <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" ></span>
