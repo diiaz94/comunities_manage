@@ -7,6 +7,7 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
   def index
     @profiles = Profile.all
+    @my_array = Profile.group(:family_id)
   end
 
   # GET /profiles/1

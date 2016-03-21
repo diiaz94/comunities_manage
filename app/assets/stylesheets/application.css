@@ -241,3 +241,6 @@ select:hover{
 
 
 
+.thumbnail {
+  padding: 3px !important;
+}

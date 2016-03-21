@@ -12,7 +12,17 @@
   $(".eliminar").append(" <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>")
   $(".mostrar").append(" <span class='glyphicon glyphicon-check' aria-hidden='true'></span>")
   $(".editar").append(" <span class='glyphicon glyphicon-edit' aria-hidden='true'></span>")
+ 
 });
+</script>
+ <script type="text/javascript">
+ var housesNameArray=[] ;
+<% @my_array.each do |p| %>
+  <%if p.family!=nil%>
+      housesNameArray.push("<%="#{p.family.nombre_casa}"%>");
+  <% end %>
+<% end %>
+
 </script>
 <% if session[:type_user]!="SimpleUser"%>
   <div style="width:100%;">
@@ -26,23 +36,22 @@
 
   </div>
 <%end%>
-  <div id="view1" class="row">
+  <div id="view-normal" class="row">
     <% count = 0 %>
     <% @profiles.each do |profile| %>
       <% if (session[:type_user]=="SimpleUser" and current_user.profile.family.id==profile.family.id ) or 
             (session[:type_user]=="Miembro" and current_user.profile.member.comunity.id==profile.family.comunity.id) or
             (session[:type_user]=="Administrador")%>
         
-        <div class="col-sm-6 col-md-3">
+        <div  class="<%=" profile casa-#{profile.nombreCasa }  col-sm-6 col-md-3"%>" id="<%="profile-#{count.to_s}"%>">
+
           <div class="thumbnail">
             <%= image_tag profile.ruta_photo, class: "avatar"%>
             <div class="caption">
               <h3><%= profile.primer_nombre %> <%= profile.primer_apellido %></h3>
               <p>Email: <%= profile.email_mask %></p>
               <p>Edad: <%= profile.edad %></p>
-              <% if current_user.profile.family != nil%>
-                <p class=<%="infofamily-#{count.to_s}"%>>Quinta: <%= profile.family.nombre_casa %></p>
-              <%end%>
+              <p class=<%="infofamily-#{count.to_s}"%>>Quinta: <%= profile.nombreCasa%></p>
               <p>
                 <%= link_to 'Ver', profile, class: "btn btn-info mostrar", role: "button"%>
                 <% if session[:type_user]!="SimpleUser"%>

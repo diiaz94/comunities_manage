@@ -1,8 +1,8 @@
 <br>
 <br>
 <p>
-Es necesario que al menos exista un usuario Administrador en el sistema.
-
+Es necesario que al menos exista un usuario Administrador en el sistema.<br> 
+Ingrese los datos de autenticacion para <b><%=(@profile.primer_nombre.to_s) +" "+ (@profile.primer_apellido.to_s)%></b>.
 </p>
 
 <br>
@@ -26,10 +26,10 @@ Es necesario que al menos exista un usuario Administrador en el sistema.
   Recuerde que todos los campos marcados con un asterisco (*) son obligatorios.
 </div>
 <%= form_for @user, url: {action: "create_admin_user"} do |f| %>
-  <div class="field">
-    <%= f.label :cedula %><br>
-    <%= f.text_field :cedula, type:"number"%>
-  </div>
+  <p>
+    <strong>Cedula:</strong>
+    <%= @profile.cedula_format %>
+  </p>
 
    <div class="field">
     <%= f.label :password %><br>

@@ -94,6 +94,15 @@ class Profile < ActiveRecord::Base
       return Date.today.year - self.fecha_nac.year
     end
   end
+
+  def nombreCasa
+    if(self.family==nil)
+      return "Sin Asignar"
+    else
+      return self.family.nombre_casa
+    end 
+  end
+  
   private
   def guardar_foto
     if @file_data

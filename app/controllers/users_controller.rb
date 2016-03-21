@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
+  before_filter :require_login, :only => :secret    
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_types, only: [:index, :new,:edit, :update]  
   before_action :validate_fields, only: [:create, :update]
-  # GET /users
+  # GET /users_url
   # GET /users.json
   def index
     @users = User.all
@@ -152,22 +153,22 @@ class UsersController < ApplicationController
       passC = params[:password_confirmation]
     
       if cedula.strip ==""
-        redirect_to(:back,notice: "El campo cedula no puede estar vacio")
+        redirect_to(:back,alert: "El campo cedula no puede estar vacio")
       else
         if cedula.strip.length<7 || cedula.strip.length >11
-          redirect_to(:back,notice: "Verifique la longitud del campo cedula")
+          redirect_to(:back,alert: "Verifique la longitud del campo cedula")
         else  
           if pass.strip ==""
-            redirect_to(:back,notice: "El campo password no puede estar vacio")
+            redirect_to(:back,alert: "El campo password no puede estar vacio")
           else
             if !(/^(?=.*[A-Z]).{1,}$/.match(pass.strip))
-              redirect_to(:back,notice: "El formato del password no esta correcto")
+              redirect_to(:back,alert: "El formato del password no esta correcto")
             else  
               if passC.strip ==""
-                redirect_to(:back,notice: "El campo confirmar password no puede estar vacio")
+                redirect_to(:back,alert: "El campo confirmar password no puede estar vacio")
               else
                 if pass !=passC
-                  redirect_to(:back,notice: "Los passwords deben coincidir")
+                  redirect_to(:back,alert: "Los passwords deben coincidir")
                 end  
               end  
             end

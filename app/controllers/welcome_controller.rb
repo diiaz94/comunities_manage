@@ -31,22 +31,39 @@ class WelcomeController < ApplicationController
   end
 
   def admin_user
-	@user = User.new
-  	render "register_user", layout: "blank"
+  	@user = User.new
+    @profile = Profile.last
+    if @profile!=nil
+      puts "EPAAAA***************"
+      render "register_user", layout: "blank"
+    else
+      redirect_to admin_profile_path
+    end
   end
 
   def create_admin_user
   	@user = User.new(user_params)
 
-  	profiles = Profile.where(cedula: @user.cedula)
+  	if(Profile.all.length>0)
+      puts "PROFILEE" + @profile.to_s
+  		@user.profile = Profile.last
+      @user.cedula = @user.profile.cedula
 
-  	if(profiles.length>0)
-  		@user.profile = profiles[0]
-  		@user.type_id =  1
-  		@user.save
-  		redirect_to login_path
+      types=Type.where(nombre: "Administrador")
+      if types.length>0
+    		@user.type_id =  types[0].id
+    		if @user.save
+    	 	 redirect_to login_path
+        else
+         redirect_to(:back,alert: "Lo sentimos, no se ha podido crear el usuario Administrador.")
+         return
+        end
+      else
+        redirect_to(:back,alert: "Lo sentimos, no se ha podido crear el usuario Administrador.")
+        return
+      end
   	else
-		redirect_to(:back,alert: "Lo sentimos, no existe un perfil con esa cedula.")
+		  redirect_to(:back,alert: "Lo sentimos, no existe un perfil con esa cedula.")
     	return
   	end
 
@@ -125,30 +142,21 @@ class WelcomeController < ApplicationController
 
 
     def validate_fields_user
-      cedula = params[:user][:cedula]
       pass = params[:user][:password]
       passC = params[:password_confirmation]
-    
-      if cedula.strip ==""
-        redirect_to(:back,notice: "El campo cedula no puede estar vacio")
+  
+      if pass.strip ==""
+        redirect_to(:back,alert: "El campo password no puede estar vacio")
       else
-        if cedula.strip.length<7 || cedula.strip.length >11
-          redirect_to(:back,notice: "Verifique la longitud del campo cedula")
+        if !(/^(?=.*[A-Z]).{1,}$/.match(pass.strip))
+          redirect_to(:back,alert: "El formato del password no esta correcto")
         else  
-          if pass.strip ==""
-            redirect_to(:back,notice: "El campo password no puede estar vacio")
+          if passC.strip ==""
+            redirect_to(:back,alert: "El campo confirmar password no puede estar vacio")
           else
-            if !(/^(?=.*[A-Z]).{1,}$/.match(pass.strip))
-              redirect_to(:back,notice: "El formato del password no esta correcto")
-            else  
-              if passC.strip ==""
-                redirect_to(:back,notice: "El campo confirmar password no puede estar vacio")
-              else
-                if pass !=passC
-                  redirect_to(:back,notice: "Los passwords deben coincidir")
-                end  
-              end  
-            end
+            if pass !=passC
+              redirect_to(:back,alert: "Los passwords deben coincidir")
+            end  
           end  
         end
       end  
