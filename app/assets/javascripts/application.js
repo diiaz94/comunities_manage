@@ -17,8 +17,8 @@
 //= require_tree .
 
 
-$(document).on('ready page:load', function () {
-	alert("a");
+$(document).on('ready', function () {
+
   if($("#notice").text().trim().length == 1){
     $("#notice").addClass("hidden");
   }else{

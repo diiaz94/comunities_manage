@@ -1,4 +1,4 @@
-$(document).on('ready page:load', function () {
+$(document).on('ready', function () {
 	$("#view-normal").show()
    	$("#view2").hide();
    	if($("#viewtype").length)
