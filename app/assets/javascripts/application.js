@@ -18,7 +18,7 @@
 
 
 $(document).ready(function() {
-
+alert("a");
   if($("#notice").text().trim().length == 1){
     $("#notice").addClass("hidden");
   }else{
