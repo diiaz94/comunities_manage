@@ -4,13 +4,7 @@
 <% if session[:type_user]=="Miembro"%>
   <h1>Lista de familias de la comunidad <%=current_user.profile.family.comunity.nombre%></h1>
 <%end%>
-<script type="text/javascript">
-$(document).on('ready', function () {
-  $(".eliminar").append(" <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>")
-  $(".mostrar").append(" <span class='glyphicon glyphicon-check' aria-hidden='true'></span>")
-  $(".editar").append(" <span class='glyphicon glyphicon-edit' aria-hidden='true'></span>")
-});
-</script>
+
   <div class="row">
     <% @families.each do |family| %>
       <% if (session[:type_user]=="SimpleUser" and current_user.profile.family.id==family.id ) or 

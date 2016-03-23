@@ -47,6 +47,12 @@ class Profile < ActiveRecord::Base
   end
 
   def mask_date(fecha)
+    $months=$months?$months:$months=["Enero","Febrero",
+                                    "Marzo","Abril",
+                                    "Mayo","Junio",
+                                    "Julio","Agosto",
+                                    "Septiembre","Octubre",
+                                    "Noviembre","Diciembre"]
     fecha[8,2]+" de "+$months[fecha[5,2].to_i-1] + " de " + fecha[0,4]
   end
 
@@ -60,7 +66,7 @@ class Profile < ActiveRecord::Base
     r=""
     index = c.length - 3
     count = c.length
-    puts count.to_s+"hereee"+index.to_s
+    #puts count.to_s+"hereee"+index.to_s
     while p>0
       r="."+c[index,3]+r
       index=index-3
@@ -74,12 +80,16 @@ class Profile < ActiveRecord::Base
 
   def telefono_format
     c=self.telefono
-    c[0,4]+"-"+c[4,3]+"-"+c[7,2]+"-"+c[9,2]
+    if(c.length==11)
+      c[0,4]+"-"+c[4,3]+"-"+c[7,2]+"-"+c[9,2]
+    else
+      c
+    end
   end
   def nombre_completo(l)
     n = self.primer_nombre+" "+self.segundo_nombre+" "+self.primer_apellido+" "+self.segundo_apellido
 
-    if n.length >l
+    if n.length >3
       n[0,l-3]+'...'
     else
       n

@@ -22,7 +22,7 @@ class UsuarioSessionsController < ApplicationController
 		        "Noviembre",
 		        "Diciembre"
 		      ]
-
+		      
 		    if current_user.type.nombre=="Administrador" and current_user.profile.family != nil
 		    	@confirm = "admin"
 				render "confirm_session", layout: "blank"

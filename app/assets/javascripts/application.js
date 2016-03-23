@@ -33,6 +33,16 @@ $(document).on('ready', function () {
   
 });
 
+$(document).on('ready page:load', function () {
+  
+  	if($(".eliminar").length&&$(".eliminar").children().length==0)
+ 	 	$(".eliminar").append(" <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>")
+	if($(".mostrar").length&&$(".mostrar").children().length==0)	
+		$(".mostrar").append(" <span class='glyphicon glyphicon-check' aria-hidden='true'></span>")
+	if($(".editar").length&&$(".editar").children().length==0)
+  		$(".editar").append(" <span class='glyphicon glyphicon-edit' aria-hidden='true'></span>")
+ 
+});
 function createPDF(i,dim,pdf,divs,filename){
 	try{
 		if(i<dim){

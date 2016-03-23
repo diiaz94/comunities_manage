@@ -1,5 +1,23 @@
 
-<p id="notice"><%= notice %></p>  
+<div id="notice" class="alert alert-success hidden" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only"></span>
+  <span class="cerrar" onclick="$('#notice').hide();">X</span>
+  <%=notice%>
+</div>
+<div id="error" class="alert alert-danger hidden" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  <span class="cerrar" onclick="$('#error').hide();">X</span>
+  <%=alert%>
+</div>
+<div id="warning" class="alert alert-warning " role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only"></span>
+  <span class="glyphicon glyphicon-remove cerrar" onclick="$('#warning').hide();"></span>
+  Recuerde que todos los campos marcados con un asterisco (*) son obligatorios.
+</div>
+
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -14,7 +32,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :cedula %><br>
+    <%= f.label :cedula %>*<br>
     <%= f.text_field :cedula, type:"number"%>
   </div>
 
@@ -30,17 +48,17 @@
   <%end%>
 
   <div class="field">
-    <%= f.label :password %><br>
+    <%= f.label :password %>*<br>
     <%= f.password_field :password %>
   </div>
   <div class="field">
-    <label for="password_confirmation">Confirma el password</label><br>
+    <label for="password_confirmation">Confirma el password</label>*<br>
     <input id="password_confirmation" name="password_confirmation" type="password">
   </div>
   <%if current_user%>
     <%if session[:type_user]=="Administrador"%>
       <div class="field">
-        <%= f.label :type_id, "Tipo de usuario" %><br>
+        <%= f.label :type_id, "Tipo de usuario" %>*<br>
         <select id="type_id" name="user[type_id]" onchange="javascript: onChangeType();">
         <% @types.each do |t| %>
           <option value=<%="#{t.id}"%> ><%=t.nombre%></option>

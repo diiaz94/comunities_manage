@@ -17,7 +17,7 @@
 <%end%>
 <%if @families.length>0%>
 	<div class="row">
-		<div class="col-sm-6 col-md-12" style="position:initial;">
+		<div class="col-sm-12 col-md-12" >
 			<div class="thumbnail">
 				<div class="caption">
 	          		<h3 class="title">Familias</h3>
@@ -28,7 +28,7 @@
 				            (session[:type_user]=="Miembro" and current_user.profile.member.comunity.id==family.comunity.id) or
 				            (session[:type_user]=="Administrador")%>
 				        
-				        <div class="col-sm-6 col-md-3" >
+				        <div class="col-sm-12 col-md-3" >
 				          <div class="thumbnail">
 				            <div  class="pointer" onclick="window.location.href='<%=particles_path(family.slug)%>'" title="Ver integrantes">
 				              <div class="container-center avatar">
@@ -58,7 +58,7 @@
 <%end%>
 <%if @profiles.length>0%>
 	<div class="row">
-		<div class="col-sm-6 col-md-12" style="position:initial;">
+		<div class="col-sm-12 col-md-12">
 			<div class="thumbnail">
 				<div class="caption">
 	          		<h3 class="title">Perfiles</h3>
@@ -70,12 +70,12 @@
 					            (session[:type_user]=="Miembro" and current_user.profile.member.comunity.id==profile.family.comunity.id) or
 					            (session[:type_user]=="Administrador")%>
 		        
-					        <div class="col-sm-6 col-md-3">
+					        <div class="col-sm-12 col-md-3">
 					          <div class="thumbnail">
 					            <%= image_tag profile.ruta_photo, class: "avatar"%>
 					            <div class="caption">
 					            	<h3 class="text-searched"> <%= profile.primer_nombre %> <%= profile.primer_apellido %></h3>
-					             	<p class="text-searched">Email: <%= profile.email_mask %></p>
+					             	<p >Email: <span class="text-searched"> <%= profile.email_mask %></span></p>
 					            	<% if profile.family != nil%>
                 	              		<p class=<%="infofamily-#{count.to_s}"%>>Quinta: <%= profile.family.nombre_casa %></p>
               						<%end%>

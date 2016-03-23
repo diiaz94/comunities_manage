@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div class="text-center">
-		<h1>Bienvenido <%=current_user.profile.primer_nombre%> <%=current_user.profile.primer_apellido%>  </h1>	
+		<h1>Bienvenido <%=current_user.profile_id%> <%=current_user.to_s%>  </h1>	
 		<hr>
 		<h3> Usted posee dos roles, ¿Con cual de ellos desea ingresar al sistema? </h3>
 
@@ -27,7 +27,7 @@
 				<%else%>
 					<div class="field row">
 						<div class="col-sm-8 col-md-8">
-							<%= label_tag "#{current_user.profile.member.job.nombre} de la comunidad #{current_user.profile.member.comunity.nombre}" %>
+							
 						</div>
 						<div class="col-sm-4 col-md-4">
 							<%=radio_button_tag 'opcion', '2'%>
@@ -36,7 +36,6 @@
 				<%end%>
 				<div class="field row">
 					<div class="col-sm-8 col-md-8">
-					<%= label_tag "Integrante de la familia que reside en la quinta #{current_user.profile.family.nombre_casa}" %>
 					</div>
 					<div class="col-sm-4 col-md-4">
 						<%=radio_button_tag 'opcion', '3'%>

@@ -148,13 +148,18 @@ class ProfilesController < ApplicationController
                 redirect_to(:back,alert: "Lo sentimos, el telefono no puede estar en blanco.")
                 return
               else
-                if fecha_nac[0] == "" or fecha_nac[1] == "" or fecha_nac[2] == "" 
-                  redirect_to(:back,alert: "Lo sentimos, debe elegir un fecha de nacimiento valida.")
+                if telefono.strip.length!=11
+                  redirect_to(:back,alert: "Lo sentimos, debe ingresar un numero de celular valido (04121234567).")
                   return
                 else
-                  if session[:type_user] != "SimpleUser" and (fecha_ing[0] == "" or fecha_ing[1] == "" or fecha_ing[2] == "") 
-                    redirect_to(:back,alert: "Lo sentimos, debe elegir una fecha de ingreso valida.")
+                  if fecha_nac[0] == "" or fecha_nac[1] == "" or fecha_nac[2] == "" 
+                    redirect_to(:back,alert: "Lo sentimos, debe elegir un fecha de nacimiento valida.")
                     return
+                  else
+                    if session[:type_user] != "SimpleUser" and (fecha_ing[0] == "" or fecha_ing[1] == "" or fecha_ing[2] == "") 
+                      redirect_to(:back,alert: "Lo sentimos, debe elegir una fecha de ingreso valida.")
+                      return
+                    end
                   end
                 end
               end                   

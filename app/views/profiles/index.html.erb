@@ -7,14 +7,6 @@
 <% if session[:type_user]=="SimpleUser"%>
   <h1>Integrantes de mi familia</h1>
 <%end%>
-<script type="text/javascript">
-$(document).on('ready', function () {
-  $(".eliminar").append(" <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>")
-  $(".mostrar").append(" <span class='glyphicon glyphicon-check' aria-hidden='true'></span>")
-  $(".editar").append(" <span class='glyphicon glyphicon-edit' aria-hidden='true'></span>")
- 
-});
-</script>
  <script type="text/javascript">
  var housesNameArray=[] ;
 <% @my_array.each do |p| %>
