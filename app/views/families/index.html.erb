@@ -5,7 +5,7 @@
   <h1>Lista de familias de la comunidad <%=current_user.profile.family.comunity.nombre%></h1>
 <%end%>
 <script type="text/javascript">
-   $(document).ready(function() {
+$(document).on('ready page:load', function () {
   $(".eliminar").append(" <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>")
   $(".mostrar").append(" <span class='glyphicon glyphicon-check' aria-hidden='true'></span>")
   $(".editar").append(" <span class='glyphicon glyphicon-edit' aria-hidden='true'></span>")

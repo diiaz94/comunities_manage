@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on('ready page:load', function () {
 	$("#view-normal").show()
    	$("#view2").hide();
    	if($("#viewtype").length)
@@ -6,11 +6,11 @@ $(document).ready(function() {
 
 	    console.log( "ready!" );
 
-$('#profile_telefono').bind('keydown', function(){
-    if(this.value.length>11){
-    	this.value = this.value.substring(0,10)
-    }
-});
+	$('#profile_telefono').bind('keydown', function(){
+	    if(this.value.length>11){
+	    	this.value = this.value.substring(0,10)
+	    }
+	});
 });
 
 

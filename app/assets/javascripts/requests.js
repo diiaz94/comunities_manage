@@ -16,7 +16,7 @@ function verifyCompletadas () {
         }
 }
 
- $(document).ready(function() {
+$(document).on('ready page:load', function () {
   if ($(".completado").length==0) {
     $("#show-completados").hide();
 	}
