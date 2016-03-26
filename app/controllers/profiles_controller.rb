@@ -84,7 +84,7 @@ class ProfilesController < ApplicationController
     @family= Family.friendly.find(params[:id])
     @profiles = Profile.where(family_id: @family.id)
     if !(@family and
-      (session[:type_user]=="Miembro" and @profile.family and current_user.profile.member.comunity.id==@family.comunity.id) or
+      (session[:type_user]=="Miembro" and @family.comunity and current_user.profile.member.comunity.id==@family.comunity.id) or
       (session[:type_user]=="Administrador"))
       redirect_to(root_path,alert: "Lo sentimos, no tiene permisos para acceder esta seccion")  
     end
