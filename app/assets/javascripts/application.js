@@ -17,6 +17,27 @@
 //= require_tree .
 
 
+
+var months=[
+		        "Enero",
+		        "Febrero",
+		        "Marzo",
+		        "Abril",
+		        "Mayo",
+		        "Junio",
+		        "Julio",
+		        "Agosto",
+		        "Septiembre",
+		        "Octubre",
+		        "Noviembre",
+		        "Diciembre"
+		      ]
+
+var days = [
+			"Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"
+			]
+var today;		      
+var contador;
 $(document).on('ready', function () {
 
   if($("#notice").text().trim().length == 1){
@@ -44,14 +65,53 @@ $(document).on('ready page:load', function () {
 
   var p = location.pathname.split("/")[1]
   $("#op-"+p).addClass("active");
- debugger
  $("#op-users").addClass(p=="types"?"active":"");
  $("#op-requests").addClass(p=="type_requests"||p=="status_requests"?"active":"");
  $("#op-comunities").addClass(p=="families" || p=="profiles"|| p=="members"|| p=="jobs"?"active":"");
  $("#op-locations").addClass(p=="states"|| p=="towns"|| p=="parishes"?"active":"");
 
-
+today = new Date();
+initClock();
 });
+
+function initClock(){
+var h=$("#clock").text();
+
+today.setDate(h.split(" ")[0].split("-")[2])
+today.setMonth(h.split(" ")[0].split("-")[1]-1)
+today.setFullYear(h.split(" ")[0].split("-")[0])
+today.setHours(h.split(" ")[1].split(":")[0])
+today.setMinutes(h.split(" ")[1].split(":")[1])
+today.setSeconds(h.split(" ")[1].split(":")[2])
+
+$("#clock").text(DateToString(today));
+clearTimeout(contador);
+updateClock();
+//alert(today);
+//debugger
+
+}
+
+function updateClock(){
+contador = setTimeout(increment,1000);
+}
+var increment = function(){
+today.setTime(today.getTime()+1000)
+$("#clock").text(DateToString(today));
+updateClock();
+
+}
+function DateToString(date){
+	if (typeof(date)=="object") {
+
+		return days[date.getDay()-1]+", "+date.getDate()+" de "+months[date.getMonth()] +" de "+ date.getFullYear()+
+		" - "+(date.getHours()<10?"0":"")+date.getHours()+":"+
+		date.getMinutes()+":"+
+		(date.getSeconds()<10?"0":"")+date.getSeconds()+(date.getHours()>12?"PM":"AM");
+	}else{
+		return date;
+	}
+}
 function createPDF(i,dim,pdf,divs,filename){
 	try{
 		if(i<dim){

@@ -12,6 +12,7 @@ class RequestsController < ApplicationController
   def index
     @requests = Request.all
     @request = Request.new
+    getCurrentTime
   end
 
   # GET /requests/1

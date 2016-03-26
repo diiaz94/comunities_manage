@@ -115,13 +115,13 @@
       </button>
       <ul class="dropdown-menu">
         <% for i in 0..@types_requests.length-1%>
-            <li><%= link_to @types_requests[i].nombre,"#",data: { confirm: '¿Estas seguro/a?'}, onclick: "$('#form-#{i}').submit()"%></li>
+            <li><%= link_to @types_requests[i].nombre,"#", onclick: "createRequest(#{i})"%></li>
         <%end%>
       </ul>
     </div>
 
     <% for i in 0..@types_requests.length-1%>
-       <%= form_for(@request, html:{id: "form-#{i}"} ) do |f| %>
+       <%= form_for(@request, html:{id: "form-create-#{i}"} ) do |f| %>
          <div>
             <input type="hidden" name="request[type_request_id]" value= "<%=@types_requests[i].id%>"/>
          </div>

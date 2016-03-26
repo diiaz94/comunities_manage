@@ -23,7 +23,8 @@ class UsuarioSessionsController < ApplicationController
 		        "Noviembre",
 		        "Diciembre"
 		      ]
-
+			session[:type_user] = current_user.type.nombre;
+					
 		    if current_user.type.nombre=="Administrador" and current_user.profile.family != nil
 		    	@confirm = "admin"
 				render "confirm_session", layout: "blank"
@@ -32,7 +33,6 @@ class UsuarioSessionsController < ApplicationController
 			    	@confirm = "member"
 					render "confirm_session", layout: "blank"
 				else
-					session[:type_user] = current_user.type.nombre;
 					redirect_back_or_to(root_path,notice:"Inicio de sesion exitoso.")
 				end
 		    end

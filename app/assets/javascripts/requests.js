@@ -15,10 +15,18 @@ function verifyCompletadas () {
             $('.completado').hide();
         }
 }
+function createRequest(i){
 
-$(document).on('ready', function () {
+	if( confirm("¿Estas seguro/a?")){
+		$("#form-create-"+i).submit();
+		
+	}
+}
+$(document).on('ready page:load', function () {
+
   if ($(".completado").length==0) {
     $("#show-completados").hide();
 	}
+
 
 });
