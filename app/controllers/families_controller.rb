@@ -1,4 +1,5 @@
 class FamiliesController < ApplicationController
+  before_action :validate_authentication
   before_action :set_family, only: [:show, :edit, :update, :destroy]
   before_action :set_comunities, only: [:index, :new,:edit, :update]
   # GET /families

@@ -1,4 +1,5 @@
 class SearchesController < ApplicationController
+  before_action :validate_authentication  
   before_action :set_search, only: [:show, :edit, :update, :destroy]
 
   # GET /searches

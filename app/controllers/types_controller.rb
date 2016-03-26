@@ -1,4 +1,5 @@
 class TypesController < ApplicationController
+  before_action :validate_authentication  
   before_action :set_type, only: [:show, :edit, :update, :destroy]
 
   # GET /types

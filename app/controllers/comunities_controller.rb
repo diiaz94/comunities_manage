@@ -1,4 +1,5 @@
 class ComunitiesController < ApplicationController
+  before_action :validate_authentication
   before_action :set_comunity, only: [:show, :edit, :update, :destroy]
   before_action :set_location_values, only: [:index, :new,:edit, :update]
   # GET /comunities

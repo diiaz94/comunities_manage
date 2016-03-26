@@ -1,4 +1,5 @@
 class JobsController < ApplicationController
+  before_action :validate_authentication
   before_action :set_job, only: [:show, :edit, :update, :destroy]
 
   # GET /jobs
