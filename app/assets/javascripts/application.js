@@ -44,7 +44,7 @@ $(document).on('ready page:load', function () {
 
   var p = location.pathname.split("/")[1]
   $("#op-"+p).addClass("active");
- 
+ debugger
  $("#op-users").addClass(p=="types"?"active":"");
  $("#op-requests").addClass(p=="type_requests"||p=="status_requests"?"active":"");
  $("#op-comunities").addClass(p=="families" || p=="profiles"|| p=="members"|| p=="jobs"?"active":"");

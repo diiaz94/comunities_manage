@@ -82,8 +82,8 @@
 		<%end%>
 
 		<% if session[:type_user]=="SimpleUser"%>
-			<li><%= link_to 'Mi Familia', profiles_path%></li>
-			<li><%= link_to 'Solicitudes', requests_path%></li>
+			<li id="op-families"><%= link_to 'Mi Familia', profiles_path%></li>
+			<li id="op-requests"><%= link_to 'Solicitudes', requests_path%></li>
 		<%end%>
 		
 			<li id ="op-my_profile" role="presentation" class="dropdown">
@@ -112,8 +112,8 @@
 		</form>
 
 	<%else%>
-		<li><%= link_to 'Iniciar Sesion', login_path%></li>
-		<li><%= link_to 'Registrate!', new_user_path%></li>
+		<li id="op-login"><%= link_to 'Iniciar Sesion', login_path%></li>
+		<li id="op-register"><%= link_to 'Registrate!', register_path%></li>
 	<%end%>	
  
 </ul>
