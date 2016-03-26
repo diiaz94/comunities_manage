@@ -1,6 +1,8 @@
 class ProfilesController < ApplicationController
+  before_action :validate_authentication
+  before_action :validate_member_access, only: [:create,:set_particles_profiles]
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
-  before_action :set_families, only: [:index, :new,:edit, :update]
+  before_action :set_families, only: [:index, :new,:edit, :update, :my_profile]
   before_action :validate_fields, only: [:create, :update]
 
   # GET /profiles
@@ -22,7 +24,9 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
-    @editing = true;
+
+      @editing = true;
+    
   end
 
   # POST /profiles
@@ -37,7 +41,7 @@ class ProfilesController < ApplicationController
         return
     end
 
-      respond_to do |format|
+    respond_to do |format|
         if @profile.save
           format.html { redirect_to @profile, notice: 'El perfil fue creado exitosamente.' }
           format.json { render :show, status: :created, location: @profile }
@@ -46,7 +50,11 @@ class ProfilesController < ApplicationController
           format.json { render json: @profile.errors, status: :unprocessable_entity }
         end
     end
-
+    @userArr = User.where(cedula: cedula.strip)
+    if(@userArr.length>0)
+      @userArr[0].profile=@profile
+      @userArr[0].save
+    end  
   end
 
   # PATCH/PUT /profiles/1
@@ -75,11 +83,28 @@ class ProfilesController < ApplicationController
   def set_particles_profiles
     @family= Family.friendly.find(params[:id])
     @profiles = Profile.where(family_id: @family.id)
+    if !(@family and
+      (session[:type_user]=="Miembro" and @profile.family and current_user.profile.member.comunity.id==@family.comunity.id) or
+      (session[:type_user]=="Administrador"))
+      redirect_to(root_path,alert: "Lo sentimos, no tiene permisos para acceder esta seccion")  
+    end
+  end
+
+  def my_profile
+    @profile = current_user.profile
+    @editing = true;
+    render 'edit'
   end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
       @profile = Profile.friendly.find(params[:id])
+        if !(@profile 
+          (session[:type_user]=="SimpleUser" and current_user.profile.family.id==@profile.family.id ) or 
+          (session[:type_user]=="Miembro" and @profile.family and current_user.profile.member.comunity.id==@profile.family.comunity.id) or
+          (session[:type_user]=="Administrador"))
+          redirect_to(root_path,alert: "Lo sentimos, no tiene permisos para acceder a esta seccion")  
+        end
     end
     def set_families
 

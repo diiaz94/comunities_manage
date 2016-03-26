@@ -31,8 +31,9 @@
   <div id="view-normal" class="row">
     <% count = 0 %>
     <% @profiles.each do |profile| %>
-      <% if (session[:type_user]=="SimpleUser" and current_user.profile.family.id==profile.family.id ) or 
-            (session[:type_user]=="Miembro" and current_user.profile.member.comunity.id==profile.family.comunity.id) or
+      <% if current_user.profile and
+            (session[:type_user]=="SimpleUser" and current_user.profile.family.id==profile.family.id ) or 
+            (session[:type_user]=="Miembro" and profile.family and current_user.profile.member.comunity.id==profile.family.comunity.id) or
             (session[:type_user]=="Administrador")%>
         
         <div  class="<%=" profile casa-#{profile.nombreCasa }  col-sm-6 col-md-3"%>" id="<%="profile-#{count.to_s}"%>">

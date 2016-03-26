@@ -89,7 +89,7 @@ class Profile < ActiveRecord::Base
   def nombre_completo(l)
     n = self.primer_nombre+" "+self.segundo_nombre+" "+self.primer_apellido+" "+self.segundo_apellido
 
-    if n.length >3
+    if n.length >l
       n[0,l-3]+'...'
     else
       n

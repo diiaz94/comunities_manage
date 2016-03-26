@@ -1,5 +1,11 @@
 <head>
-  <title>****Gestion de Comunidades****</title>
+  <title>Gestion de Comunidades</title>
+  <%if current_user%>
+  	<link rel="shortcut icon" href="photo_store/usericon.ico">
+  <%else%>
+  	<link rel="shortcut icon" href="photo_store/usericonlogout.ico">
+
+  <%end%>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>

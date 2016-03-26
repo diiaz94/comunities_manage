@@ -41,7 +41,16 @@ $(document).on('ready page:load', function () {
 		$(".mostrar").append(" <span class='glyphicon glyphicon-check' aria-hidden='true'></span>")
 	if($(".editar").length&&$(".editar").children().length==0)
   		$(".editar").append(" <span class='glyphicon glyphicon-edit' aria-hidden='true'></span>")
+
+  var p = location.pathname.split("/")[1]
+  $("#op-"+p).addClass("active");
  
+ $("#op-users").addClass(p=="types"?"active":"");
+ $("#op-requests").addClass(p=="type_requests"||p=="status_requests"?"active":"");
+ $("#op-comunities").addClass(p=="families" || p=="profiles"|| p=="members"|| p=="jobs"?"active":"");
+ $("#op-locations").addClass(p=="states"|| p=="towns"|| p=="parishes"?"active":"");
+
+
 });
 function createPDF(i,dim,pdf,divs,filename){
 	try{

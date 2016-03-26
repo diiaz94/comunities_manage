@@ -8,6 +8,7 @@ class UsuarioSessionsController < ApplicationController
 	end
 	def create
 		if @user = login(params[:cedula],params[:password])
+			puts "CORRECT"
 			$months=[
 		        "Enero",
 		        "Febrero",
@@ -22,7 +23,7 @@ class UsuarioSessionsController < ApplicationController
 		        "Noviembre",
 		        "Diciembre"
 		      ]
-		      
+
 		    if current_user.type.nombre=="Administrador" and current_user.profile.family != nil
 		    	@confirm = "admin"
 				render "confirm_session", layout: "blank"
@@ -36,6 +37,8 @@ class UsuarioSessionsController < ApplicationController
 				end
 		    end
 		else
+			puts "NOCORRECT"
+			
 			flash.now[:alert] = "Verifique su correo o contraseña!"
 			render action: :new
 		end

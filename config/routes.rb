@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   post 'create_admin_user' => 'welcome#create_admin_user', as: :create_admin_user
   get 'admin_profile' => 'welcome#admin_profile', as: :admin_profile
   get 'admin_user' => 'welcome#admin_user', as: :admin_user
-
+  get 'my_profile' => 'profiles#my_profile', as: :my_profile
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

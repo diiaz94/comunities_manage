@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>****Gestion de Comunidades****</title>
+  <title>Gestion de Comunidades</title>
+  <%if current_user%>
+  	<link rel="shortcut icon" href="photo_store/usericon.ico">
+  <%else%>
+  	<link rel="shortcut icon" href="photo_store/usericonlogout.ico">
+
+  <%end%>
+
+  
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -14,35 +22,51 @@
 		<nav style= "display: in-line; margin-top:5%" >
 			
 <ul class="nav nav-tabs"> 
-	<li role="presentation" class="activ"><%= link_to 'Inicio', root_path%></li>
+	<li id="op-" role="presentation"><%= link_to 'Inicio', root_path%></li>
 	<%if current_user%>
 		<% if session[:type_user]=="Administrador"%>
 			
-			
-
-			<li><%= link_to 'Usuarios', users_path%></li>
-			<li><%= link_to 'Solicitudes', requests_path%></li>
+			<li  id="op-users" role="presentation" class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Usuarios 
+				<span class="caret"></span> 
+				</a> 
+				<ul class="dropdown-menu"> 
+					<li><%= link_to 'Ver Usuarios', users_path%></li>
+					<li role="separator" class="divider"></li>
+					<li><%= link_to 'Tipos de Usuarios', types_path%></li>
+				</ul> 
+			</li>
+			<li  id="op-requests" role="presentation" class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Solicitudes 
+				<span class="caret"></span> 
+				</a> 
+				<ul class="dropdown-menu"> 
+					<li><%= link_to 'Ver Solicitudes', requests_path%></li>
+					<li role="separator" class="divider"></li>
+					<li><%= link_to 'Tipos de Solicitudes', type_requests_path%></li>
+					<li><%= link_to 'Estados de Solicitudes', status_requests_path%></li>
+				</ul> 
+			</li>
 				
-			<li role="presentation" class="dropdown">
+			<li  id="op-comunities" role="presentation" class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Comunidades 
 				<span class="caret"></span> 
 				</a> 
 				<ul class="dropdown-menu"> 
 					<li><%= link_to 'Ver Comunidades', comunities_path%></li>
+					<li role="separator" class="divider"></li>
 					<li><%= link_to 'Ver Familias', families_path%></li>
 					<li><%= link_to 'Ver Perfiles', profiles_path%></li>
 					<li><%= link_to 'Ver Miembros', members_path%></li>
+					<li role="separator" class="divider"></li>
+					<li><%= link_to 'Roles', jobs_path%></li>
 				</ul> 
 			</li>
-			<li role="presentation" class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Configuracion 
+			<li id="op-locations" role="presentation" class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Ubicaciones
 				<span class="caret"></span> 
 				</a> 
 				<ul class="dropdown-menu"> 
-					<li><%= link_to 'Tipos de Solicitudes', type_requests_path%></li>
-					<li><%= link_to 'Estados de Solicitudes', status_requests_path%></li>
-					<li><%= link_to 'Tipos de Usuarios', types_path%></li>
-					<li><%= link_to 'Roles', jobs_path%></li>
 					<li><%= link_to 'Estados', states_path%></li>
 					<li><%= link_to 'Municipios', towns_path%></li>
 					<li><%= link_to 'Parroquias', parishes_path%></li>
@@ -51,9 +75,9 @@
 		<%end%>
 
 		<% if session[:type_user]=="Miembro"%>
-			<li><%= link_to 'Familias', families_path%></li>
-			<li><%= link_to 'Perfiles', profiles_path%></li>
-			<li><%= link_to 'Solicitudes ('+Request.where(comunity_id: current_user.profile.member.comunity_id,status_request_id: StatusRequest.where(nombre: "Pendiente")[0].id).length.to_s+')', requests_path%></li>
+			<li id="op-families"><%= link_to 'Familias', families_path%></li>
+			<li id="op-profiles"><%= link_to 'Perfiles', profiles_path%></li>
+			<li id="op-requests"><%= link_to 'Solicitudes ('+Request.where(comunity_id: current_user.profile.member.comunity_id,status_request_id: StatusRequest.where(nombre: "Pendiente")[0].id).length.to_s+')', requests_path%></li>
 
 		<%end%>
 
@@ -62,13 +86,13 @@
 			<li><%= link_to 'Solicitudes', requests_path%></li>
 		<%end%>
 		
-			<li role="presentation" class="dropdown">
+			<li id ="op-my_profile" role="presentation" class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Mi Cuenta 
 				<span class="caret"></span> 
 				</a> 
 				<ul class="dropdown-menu"> 
 					<% if current_user.profile%>
-						<li><%= link_to 'Mi perfil', edit_profile_path(current_user.profile)%></li>
+						<li id="myaccount_link" ><%= link_to 'Mi perfil', my_profile_path ,{id: "myaccount_link"}%></li>
 					<%end%>
 					<li><%= link_to 'Cerrar Sesion', logout_path%></li>
 				</ul> 

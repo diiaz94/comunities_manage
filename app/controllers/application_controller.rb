@@ -6,7 +6,22 @@ class ApplicationController < ActionController::Base
 		raise ActionController::RoutingError.new('Not Found')
 	end
 
-	def not_authenticated
-	  redirect_to login_url, :alert => "First login to access this page."
+	def validate_authentication
+		if !current_user
+	        redirect_to(login_path,alert: "Debes iniciar sesion para acceder a esta seccion")
+	    end
 	end
+	def validate_admin_access
+        if current_user.type.nombre!="Administrador"
+          redirect_to(root_path,alert: "Lo sentimos, no tiene permisos para acceder esta seccion")
+        end
+    end
+	def validate_member_access
+        if current_user.type.nombre!="Administrador"
+        	if current_user.type.nombre!="Miembro"
+          		redirect_to(root_path,alert: "Lo sentimos, no tiene permisos para acceder esta seccion")
+        	end
+        end
+    end
+
 end

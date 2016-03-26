@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :require_login, :only => :secret    
+  before_action :validate_authentication
+  before_action :validate_admin_access
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_types, only: [:index, :new,:edit, :update]  
   before_action :validate_fields, only: [:create, :update]
@@ -101,13 +102,13 @@ class UsersController < ApplicationController
       end
     else
       if cod_error == 1
-        redirect_to(new_user_path,notice: "Ya existe un usuario con esta cedula.")
+        redirect_to(new_user_path,alert: "Ya existe un usuario con esta cedula.")
       else
         if cod_error == 2
-          redirect_to(new_user_path,notice: "Lo sentimos, no existe un perfil asociado a la cedula de ingresada. Comuniquese con el director de la comunidad")
+          redirect_to(new_user_path,alert: "Lo sentimos, no existe un perfil asociado a la cedula de ingresada. Comuniquese con el director de la comunidad")
         else
           if cod_error == 3
-            redirect_to(login_path,notice: "No tienes permisos para acceder a esta seccion.")
+            redirect_to(login_path,alert: "No tienes permisos para acceder a esta seccion.")
           end
         end
       end
