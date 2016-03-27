@@ -1,5 +1,6 @@
 class StatusRequestsController < ApplicationController
-  before_action :validate_authentication  
+  before_action :validate_authentication
+  before_action :validate_admin_access  
   before_action :set_status_request, only: [:show, :edit, :update, :destroy]
 
   # GET /status_requests

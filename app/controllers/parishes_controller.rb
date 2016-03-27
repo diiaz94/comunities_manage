@@ -1,5 +1,6 @@
 class ParishesController < ApplicationController
-  before_action :validate_authentication  
+  before_action :validate_authentication
+  before_action :validate_admin_access  
   before_action :set_parish, only: [:show, :edit, :update, :destroy]
   before_action :set_towns, only: [:index, :new,:edit, :update]
   # GET /parishes

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :validate_authentication, except:[:new, :create]
+  before_action :validate_authentication, except:[:new, :create] 
   before_action :validate_admin_access, except:[:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_types, only: [:index, :new,:edit, :update]  

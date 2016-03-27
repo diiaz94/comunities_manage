@@ -1,5 +1,6 @@
 class TypeRequestsController < ApplicationController
-  before_action :validate_authentication  
+  before_action :validate_authentication
+  before_action :validate_admin_access  
   before_action :set_type_request, only: [:show, :edit, :update, :destroy]
 
   # GET /type_requests

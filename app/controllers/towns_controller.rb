@@ -1,5 +1,6 @@
 class TownsController < ApplicationController
-  before_action :validate_authentication  
+  before_action :validate_authentication
+  before_action :validate_admin_access  
   before_action :set_town, only: [:show, :edit, :update, :destroy]
   before_action :set_states, only: [:index, :new,:edit, :update]
   # GET /towns
