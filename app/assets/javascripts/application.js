@@ -104,7 +104,7 @@ updateClock();
 function DateToString(date){
 	if (typeof(date)=="object") {
 
-		return days[date.getDay()-1]+", "+date.getDate()+" de "+months[date.getMonth()] +" de "+ date.getFullYear()+
+		return days[date.getDay()]+", "+date.getDate()+" de "+months[date.getMonth()] +" de "+ date.getFullYear()+
 		" - "+(date.getHours()<10?"0":"")+date.getHours()+":"+
 		date.getMinutes()+":"+
 		(date.getSeconds()<10?"0":"")+date.getSeconds()+(date.getHours()>12?"PM":"AM");
