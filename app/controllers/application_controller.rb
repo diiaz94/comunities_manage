@@ -12,13 +12,13 @@ class ApplicationController < ActionController::Base
 	    end
 	end
 	def validate_admin_access
-        if current_user.type.nombre!="Administrador"
+        if current_user.type.nombre!="Administrador"||session[:type_user]!="Administrador"
           redirect_to(root_path,alert: "Lo sentimos, no tiene permisos para acceder esta seccion")
         end
     end
 	def validate_member_access
-        if current_user.type.nombre!="Administrador"
-        	if current_user.type.nombre!="Miembro"
+        if current_user.type.nombre!="Administrador"||session[:type_user]!="Administrador"
+        	if current_user.type.nombre!="Miembro"||session[:type_user]!="Miembro"
           		redirect_to(root_path,alert: "Lo sentimos, no tiene permisos para acceder esta seccion")
         	end
         end
