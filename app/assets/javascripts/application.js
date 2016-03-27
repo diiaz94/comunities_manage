@@ -105,7 +105,7 @@ function DateToString(date){
 	if (typeof(date)=="object") {
 
 		return days[date.getDay()]+", "+date.getDate()+" de "+months[date.getMonth()] +" de "+ date.getFullYear()+
-		" - "+(date.getHours()<10?"0":"")+date.getHours()+":"+
+		" - "+(date.getHours()<13?(date.getHours()<10?"0"+date.getHours()):(date.getHours()-12<10?"0"+date.getHours()-12:date.getHours()-12))+":"+
 		date.getMinutes()+":"+
 		(date.getSeconds()<10?"0":"")+date.getSeconds()+(date.getHours()>12?"PM":"AM");
 	}else{
