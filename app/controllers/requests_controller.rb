@@ -13,7 +13,6 @@ class RequestsController < ApplicationController
   # GET /requests.json
   def index
     @requests = Request.all
-    @requests.destroy_all
     @request = Request.new
     getCurrentTime
   end
