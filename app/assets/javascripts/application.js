@@ -38,6 +38,7 @@ var days = [
 			]
 var today;		      
 var contador;
+var documentPDF;
 $(document).on('ready', function () {
 
   if($("#notice").text().trim().length == 1){
@@ -51,7 +52,6 @@ $(document).on('ready', function () {
   }else{
     $("#error").removeClass("hidden");
   }
-  
 });
 
 $(document).on('ready page:load', function () {
@@ -72,18 +72,29 @@ $(document).on('ready page:load', function () {
 
 today = new Date();
 initClock();
+  	$('.num-tlf').unbind();
+  	$('.num-tlf').bind('keyup', function(){
+		if(this.value.length>11){
+	    	this.value = this.value.substring(0,11)
+	    }
+	});
+	$('.num-tlf').bind('keypress', function(){
+		if(this.value.length>10){
+	    	this.value = this.value.substring(0,11)
+	    }
+	});
 });
 
 function initClock(){
 var h=$("#clock").text();
-
-today.setDate(h.split(" ")[0].split("-")[2])
-today.setMonth(h.split(" ")[0].split("-")[1]-1)
-today.setFullYear(h.split(" ")[0].split("-")[0])
-today.setHours(h.split(" ")[1].split(":")[0])
-today.setMinutes(h.split(" ")[1].split(":")[1])
-today.setSeconds(h.split(" ")[1].split(":")[2])
-
+if(h!=="null"){
+	today.setDate(h.split(" ")[0].split("-")[2])
+	today.setMonth(h.split(" ")[0].split("-")[1]-1)
+	today.setFullYear(h.split(" ")[0].split("-")[0])
+	today.setHours(h.split(" ")[1].split(":")[0])
+	today.setMinutes(h.split(" ")[1].split(":")[1])
+	today.setSeconds(h.split(" ")[1].split(":")[2])
+}
 $("#clock").text(DateToString(today));
 clearTimeout(contador);
 updateClock();
@@ -105,13 +116,14 @@ function DateToString(date){
 	if (typeof(date)=="object") {
 
 		return days[date.getDay()]+", "+date.getDate()+" de "+months[date.getMonth()] +" de "+ date.getFullYear()+
-		" - "+(date.getHours()<13?(date.getHours()<10?"0"+date.getHours()):(date.getHours()-12<10?"0"+date.getHours()-12:date.getHours()-12))+":"+
-		date.getMinutes()+":"+
+		" - "+((date.getHours()<13?date.getHours():date.getHours()-12)<10?"0":"")+(date.getHours()<13?date.getHours():date.getHours()-12)+":"+
+		(date.getMinutes()<10?"0":"")+date.getMinutes()+":"+
 		(date.getSeconds()<10?"0":"")+date.getSeconds()+(date.getHours()>12?"PM":"AM");
 	}else{
 		return date;
 	}
 }
+
 function createPDF(i,dim,pdf,divs,filename){
 	try{
 		if(i<dim){

@@ -13,7 +13,8 @@
 
 <%if current_user%>
 	<%if current_user.profile%>	
-		<h1>Bienvenido/a Estimado/a <%=current_user.profile.primer_nombre%> <%=current_user.profile.primer_apellido%></h1>
+		<h1>Bienvenid<%= (current_user.profile.sexo!=nil and current_user.profile.sexo) ? "o" : (current_user.profile.sexo!=nil ? "a" : "o/a") %> 
+    Estimad<%= (current_user.profile.sexo!=nil and current_user.profile.sexo) ? "o" : (current_user.profile.sexo!=nil ? "a" : "o/a") %> <%=current_user.profile.primer_nombre%> <%=current_user.profile.primer_apellido%></h1>
 	<%else%>
 		<h1>Bienvenido Administrador</h1>
 	<%end%>

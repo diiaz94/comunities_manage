@@ -1,7 +1,9 @@
 class FamiliesController < ApplicationController
   before_action :validate_authentication
+  before_action :validate_member_access, only: [:update,:destroy,:create]
   before_action :set_family, only: [:show, :edit, :update, :destroy]
   before_action :set_comunities, only: [:index, :new,:edit, :update]
+  before_action :validate_fields, only: [:create, :update]
   # GET /families
   # GET /families.json
   def index
@@ -27,7 +29,9 @@ class FamiliesController < ApplicationController
   # POST /families.json
   def create
     @family = Family.new(family_params)
-
+    if session[:type_user]=="Miembro"
+      @family.comunity = current_user.profile.member.comunity
+    end  
     respond_to do |format|
       if @family.save
         format.html { redirect_to @family, notice: 'La familia fue creada exitosamente.' }
@@ -71,6 +75,25 @@ class FamiliesController < ApplicationController
     end
     def set_comunities
       @comunities = Comunity.all
+    end
+
+    def validate_fields
+      nombre = params[:family][:nombre_casa]
+      numero = params[:family][:numero_casa] 
+      if nombre.strip ==""
+          redirect_to(:back,alert: "Lo sentimos, el nombre no puede estar en blanco.")
+          return
+      else
+        if numero.strip == ""
+          redirect_to(:back,alert: "Lo sentimos, el numero no puede estar en blanco.")
+          return
+        else
+          if Family.where(numero_casa:numero).count>0 || Family.where(nombre_casa: nombre,numero_casa:numero).count>0 
+          redirect_to(:back,alert: "Lo sentimos, ya existe un familia con estos datos.")
+          return
+          end  
+        end  
+      end     
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def family_params

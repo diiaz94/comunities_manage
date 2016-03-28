@@ -16,8 +16,9 @@ function verifyCompletadas () {
         }
 }
 function createRequest(i){
-
-	if( confirm("¿Estas seguro/a?")){
+var motive = prompt("Si esta seguro por favor indique el motivo de su solicitud,\nde lo contrario oprima el boton 'Cancelar'.");
+	if(motive!=null){
+		($("#form-create-"+i).find("#motive")).val(motive);
 		$("#form-create-"+i).submit();
 		
 	}

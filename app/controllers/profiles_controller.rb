@@ -131,6 +131,7 @@ class ProfilesController < ApplicationController
       papellido = params[:profile][:primer_apellido]
       email = params[:profile][:email]
       telefono = params[:profile][:telefono]
+      sexo = params[:profile][:sexo]
       fecha_nac =[ 
                   params[:profile]["fecha_nac(3i)"],
                   params[:profile]["fecha_nac(2i)"],
@@ -165,30 +166,35 @@ class ProfilesController < ApplicationController
             redirect_to(:back,alert: "Lo sentimos, el primer apellido no puede estar en blanco.")
             return
           else
-            if email.strip == ""
-              redirect_to(:back,alert: "Lo sentimos, el email no puede estar en blanco.")
+            if !sexo
+              redirect_to(:back,alert: "Lo sentimos, debe elegir un sexo.")
               return
             else
-              if telefono.strip == ""
-                redirect_to(:back,alert: "Lo sentimos, el telefono no puede estar en blanco.")
+              if email.strip == ""
+                redirect_to(:back,alert: "Lo sentimos, el email no puede estar en blanco.")
                 return
               else
-                if telefono.strip.length!=11
-                  redirect_to(:back,alert: "Lo sentimos, debe ingresar un numero de celular valido (04121234567).")
+                if telefono.strip == ""
+                  redirect_to(:back,alert: "Lo sentimos, el telefono no puede estar en blanco.")
                   return
                 else
-                  if fecha_nac[0] == "" or fecha_nac[1] == "" or fecha_nac[2] == "" 
-                    redirect_to(:back,alert: "Lo sentimos, debe elegir un fecha de nacimiento valida.")
+                  if telefono.strip.length!=11
+                    redirect_to(:back,alert: "Lo sentimos, debe ingresar un numero de celular valido (04121234567).")
                     return
                   else
-                    if session[:type_user] != "SimpleUser" and (fecha_ing[0] == "" or fecha_ing[1] == "" or fecha_ing[2] == "") 
-                      redirect_to(:back,alert: "Lo sentimos, debe elegir una fecha de ingreso valida.")
+                    if fecha_nac[0] == "" or fecha_nac[1] == "" or fecha_nac[2] == "" 
+                      redirect_to(:back,alert: "Lo sentimos, debe elegir un fecha de nacimiento valida.")
                       return
+                    else
+                      if session[:type_user] != "SimpleUser" and (fecha_ing[0] == "" or fecha_ing[1] == "" or fecha_ing[2] == "") 
+                        redirect_to(:back,alert: "Lo sentimos, debe elegir una fecha de ingreso valida.")
+                        return
+                      end
                     end
                   end
-                end
-              end                   
-            end                 
+                end                   
+              end                 
+            end
           end 
         end
       end   
@@ -198,6 +204,6 @@ class ProfilesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:cedula, :primer_nombre,:segundo_nombre, :primer_apellido, :segundo_apellido, :email, :telefono, :fecha_nac,:fecha_ing, :family_id,:photo)
+      params.require(:profile).permit(:cedula, :primer_nombre,:segundo_nombre, :primer_apellido, :segundo_apellido, :email, :telefono, :fecha_nac,:fecha_ing, :family_id,:photo,:sexo)
     end
 end

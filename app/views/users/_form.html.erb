@@ -15,7 +15,10 @@
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   <span class="sr-only"></span>
   <span class="glyphicon glyphicon-remove cerrar" onclick="$('#warning').hide();"></span>
-  Recuerde que todos los campos marcados con un asterisco (*) son obligatorios.
+  Recuerde que todos los campos marcados con un asterisco (*) son obligatorios. <br>
+  La contraseña debe incluir al menos:<br>
+  <b>&nbsp; - Una letra mayuscula </b><br>
+  <b>&nbsp; - Un caracter especial</b>
 </div>
 
 <%= form_for(@user) do |f| %>

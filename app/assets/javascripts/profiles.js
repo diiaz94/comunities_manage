@@ -6,11 +6,6 @@ $(document).on('ready', function () {
 
 	    console.log( "ready!" );
 
-	$('#profile_telefono').bind('keydown', function(){
-	    if(this.value.length>11){
-	    	this.value = this.value.substring(0,10)
-	    }
-	});
 });
 
 

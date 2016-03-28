@@ -80,12 +80,17 @@
     <%= f.text_field :segundo_apellido%>
   </div>
   <div class="field">
+  <%= f.label :sexo %>*<br>
+  <%=radio_button("profile", "sexo", "true") %> Masculino <br>
+  <%=radio_button("profile", "sexo", "false") %> Femenino
+  </div>
+  <div class="field">
     <%= f.label :email %>*<br>
     <%= f.text_field :email, type:"email",required: "true",title: "Este campo no puede estar vacio" %> 
   </div>
   <div class="field">
     <%= f.label :telefono %>*<br>
-    <%= f.text_field :telefono, type:"number",required: "true",title: "Este campo no puede estar vacio"%> 
+    <%= f.text_field :telefono, type:"number",required: "true",title: "Este campo no puede estar vacio",class: "num-tlf"%> 
   </div>
   <div class="field">
     <%= f.label :fecha_nac, "Fecha de nacimiento" %>*<br>

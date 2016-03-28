@@ -121,9 +121,10 @@
     </div>
 
     <% for i in 0..@types_requests.length-1%>
-       <%= form_for(@request, html:{id: "form-create-#{i}"} ) do |f| %>
+       <%= form_for(@request, html:{id: "form-create-#{i}", method: "post"} ) do |f| %>
          <div>
             <input type="hidden" name="request[type_request_id]" value= "<%=@types_requests[i].id%>"/>
+            <input type="hidden" name="request[motive]" id="motive" value= ""/>
          </div>
       <% end %>
     <%end%>

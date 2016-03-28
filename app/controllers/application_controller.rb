@@ -31,19 +31,26 @@ require "uri"
 require "json"
 
 def getCurrentTime
+  begin
+    puts "Begin******"
 
-  uri = URI.parse("http://api.timezonedb.com/?zone=America/Caracas&format=json&key=ZKLS5YG2UNIH")
-  http = Net::HTTP.new(uri.host, uri.port)
-  request = Net::HTTP::Get.new(uri.request_uri)
+    uri = URI.parse("http://api.timezonedb.com/?zone=America/Caracas&format=json&key=ZKLS5YG2UNIH")
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Get.new(uri.request_uri)
+ 
+    res = http.request(request)
+    response = JSON.parse(res.body)
 
-  res = http.request(request)
-  response = JSON.parse(res.body)
-  if(response["timestamp"])
-    DateTime.strptime(response["timestamp"].to_s,'%s').to_formatted_s(:db) 
-  else
-    DateTime.current.to_formatted_s(:db) 
-  end
- end  
+    if(response["status"] and response["status"]=="OK" and response["timestamp"])
+      puts "OK****"
+      DateTime.strptime(response["timestamp"].to_s,'%s').to_formatted_s(:db) 
+    else
+    return  "null"
+    end
+  rescue
+    return "null"
+  end  
+end  
 helper_method :getCurrentTime
 
 

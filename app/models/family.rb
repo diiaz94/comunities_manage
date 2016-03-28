@@ -43,4 +43,9 @@ class Family < ActiveRecord::Base
 		end 
 		return an	
 	end	
+
+	def nombreCompleto
+		n = self.nombre_casa+"-"+self.numero_casa
+		return n.length<17?n:n[0,14]+"..."
+	end
 end

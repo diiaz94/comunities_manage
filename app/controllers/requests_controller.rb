@@ -7,7 +7,8 @@ class RequestsController < ApplicationController
   before_action :set_types_requests, only: [:index, :new,:edit, :update]
   before_action :set_status_requests, only: [:index, :new,:edit, :update]
 
-  
+  after_action :set_date_created_at, only: [:create]
+  after_action :set_date_update_at, only: [:update]
   # GET /requests
   # GET /requests.json
   def index
@@ -99,8 +100,18 @@ class RequestsController < ApplicationController
     def set_status_requests
       @status_requests = StatusRequest.all
     end
+    def set_date_created_at
+      time = getCurrentTime
+      @request.created_at = time ? time : Date.today
+      @request.save
+    end
+    def set_date_updated_at
+      time = getCurrentTime
+      @request.updated_at = time ? time : Date.today
+      @request.save
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def request_params
-      params.require(:request).permit(:profile_id,:comunity_id,:status_request_id,:type_request_id)
+      params.require(:request).permit(:profile_id,:comunity_id,:status_request_id,:type_request_id,:motive)
     end
 end

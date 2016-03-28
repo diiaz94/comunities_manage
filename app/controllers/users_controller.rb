@@ -166,7 +166,7 @@ class UsersController < ApplicationController
               redirect_to(:back,alert: "El formato del password no esta correcto")
             else  
               if passC.strip ==""
-                redirect_to(:back,alert: "El campo confirmar password no puede estar vacio")
+                redirect_to(:back,alert: "El campo confirmar no puede estar vacio")
               else
                 if pass !=passC
                   redirect_to(:back,alert: "Los passwords deben coincidir")

@@ -25,6 +25,16 @@
   <strong>Apellidos:</strong>
   <%= @profile.primer_apellido %> <%= @profile.segundo_apellido %> 
 </p>
+<% if @profile.sexo!=nil%>
+  <p>
+    <strong>Sexo:</strong>
+    <% if @profile.sexo%>
+      Masculino
+    <% else%>
+      Femenino
+    <% end%> 
+  </p>
+<% end%>
 
 <p>
   <strong>Email:</strong>

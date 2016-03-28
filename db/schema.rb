@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115042408) do
+ActiveRecord::Schema.define(version: 20160328033112) do
 
   create_table "comunities", force: true do |t|
     t.string   "rif",          null: false
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20151115042408) do
     t.integer  "family_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "sexo"
   end
 
   add_index "profiles", ["family_id"], name: "index_profiles_on_family_id"
@@ -100,6 +101,7 @@ ActiveRecord::Schema.define(version: 20151115042408) do
     t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "motive"
   end
 
   create_table "searches", force: true do |t|

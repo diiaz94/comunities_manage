@@ -1,3 +1,22 @@
+
+<div id="notice" class="alert alert-success hidden" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only"></span>
+  <span class="cerrar" onclick="$('#notice').hide();">X</span>
+  <%=notice%>
+</div>
+<div id="error" class="alert alert-danger hidden" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  <span class="cerrar" onclick="$('#error').hide();">X</span>
+  <%=alert%>
+</div>
+<div id="warning" class="alert alert-warning " role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only"></span>
+  <span class="glyphicon glyphicon-remove cerrar" onclick="$('#warning').hide();"></span>
+  Recuerde que todos los campos marcados con un asterisco (*) son obligatorios.
+</div>
 <%= form_for(@family) do |f| %>
   <% if @family.errors.any? %>
     <div id="error_explanation">
@@ -12,19 +31,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :nombre_casa,"Nombre de la quinta" %><br>
+    <%= f.label :nombre_casa,"Nombre de la quinta" %>*<br>
     <%= f.text_field :nombre_casa %>
   </div>
   <div class="field">
-    <%= f.label :numero_casa, "Numero de la quinta" %><br>
-    <%= f.text_field :numero_casa, type:"number" %>
+    <%= f.label :numero_casa, "Numero de la quinta" %>*<br>
+    <%= f.text_field :numero_casa, type:"number"%>
   </div>
+  <%if session[:type_user]=="Administrador"%>
   <div class="field">
-    <%= f.label :telefono %><br>
-    <%= f.text_field :telefono, type:"number" %>
-  </div>
-  <div class="field">
-    <%= f.label :comunity_id, "Comunidad" %><br>
+    <%= f.label :comunity_id, "Comunidad" %>*<br>
     <select id="comunity_id" name="family[comunity_id]" onchange="javascript: onChangeType();">
     <% @comunities.each do |c| %>
     <%if session[:type_user]=="Administrador" or
@@ -33,6 +49,11 @@
     <%end%>
     <% end %> 
     </select>
+  </div>
+  <% end %> 
+  <div class="field">
+    <%= f.label :telefono %><br>
+    <%= f.text_field :telefono, type:"number",class: "num-tlf"  %>
   </div>
   <div class="field">
     <%= f.label :direccion %><br>

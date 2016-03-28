@@ -14,12 +14,12 @@
   <strong>Telefono:</strong>
   <%= @family.telefono %>
 </p>
-
+<%if session[:type_user]=="Administrador"%>
 <p>
   <strong>Comunidad:</strong>
   <%= @family.comunity.nombre %>
 </p>
-
+<%end%>
 <p>
   <strong>Direccion:</strong>
   <%= @family.direccion %>
