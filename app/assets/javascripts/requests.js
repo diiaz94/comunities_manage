@@ -10,9 +10,9 @@ $("#form-update").submit();
 
 function verifyCompletadas () {
 	if (document.getElementById('check-completados').checked) {
-            $('.completado').show();
+            $('.completado').fadeIn();
         } else {
-            $('.completado').hide();
+            $('.completado').fadeOut();
         }
 }
 function createRequest(i){

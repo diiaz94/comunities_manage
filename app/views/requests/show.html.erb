@@ -4,7 +4,7 @@
   <%=notice%>
 <span class="cerrar" onclick="$('#notice').hide();">X</span>
 </div>
-<div style="width:650px;margin:0 auto;">
+<div id = "document-pdf" style="width:650px;margin:0 auto;">
 	<div class="pdf-style">
 		<%=ERB.new(@request.type_request.formato.gsub(/^  /, ''), 0, "%<>").result(binding).html_safe%>
 	</div>

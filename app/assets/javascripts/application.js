@@ -133,6 +133,8 @@ function createPDF(i,dim,pdf,divs,filename){
 				html2canvas(obj,{
 					onrendered: function(canvas) {
 						try{
+			
+							
 							var imgData = canvas.toDataURL("image/jpeg",1.0);
 							pdf.addImage(imgData, 'JPEG', 18, 18, obj.offsetWidth, obj.offsetHeight);
 							if(i<dim-1)
@@ -161,8 +163,23 @@ function createPDF(i,dim,pdf,divs,filename){
 
 function PDFprueba(){
 		
-		var divs = ["<div id='pedro-0' style='background-color: white;'>"+$(".pdf-style")[0].outerHTML+"</div>"]
-		createPDF(0,divs.length,new jsPDF(),divs,"prueba");
-	
+		//var divs = ["<div id='pedro-0' style='background-color: white;'>"+$(".pdf-style")[0].outerHTML+"</div>"]
+		//createPDF(0,divs.length,new jsPDF(),divs,"prueba");
+		var pdf = new jsPDF();
+		$(".pdf-style").css("background","white");
+		html2canvas($(".pdf-style"),{
+					onrendered: function(canvas) {
+						try{
+			
+							
+							var imgData = canvas.toDataURL("image/jpeg",1.0);
+							pdf.addImage(imgData, 'JPEG', 16, 22);
+							
+							//obj.remove();
+							pdf.save("Solicitud.pdf")
+						}catch(e){
+							//obj.remove();
+						}
+					}
+				});
 }
-

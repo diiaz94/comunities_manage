@@ -8,7 +8,7 @@ class RequestsController < ApplicationController
   before_action :set_status_requests, only: [:index, :new,:edit, :update]
 
   after_action :set_date_created_at, only: [:create]
-  after_action :set_date_update_at, only: [:update]
+  after_action :set_date_updated_at, only: [:update]
   # GET /requests
   # GET /requests.json
   def index

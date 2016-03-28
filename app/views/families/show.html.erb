@@ -26,5 +26,13 @@
 </p>
 
 
-<%= link_to 'Editar', edit_family_path(@family) %> |
-<%= link_to 'Regresar', families_path %>
+ <button type="button" class="btn btn-danger" aria-label="Left Align" onclick="window.location.href='<%=families_path%>'">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" ></span>
+      Regresar &nbsp;
+    </button>
+<% if session[:type_user]!="SimpleUser"%>
+    <button type="button" class="btn btn-primary" aria-label="Left Align" onclick="window.location.href='<%=edit_family_path(@family)%>'">
+      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+      Editar &nbsp;
+    </button>
+<%end%>

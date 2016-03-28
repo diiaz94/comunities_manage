@@ -75,6 +75,7 @@ class ProfilesController < ApplicationController
   # DELETE /profiles/1.json
   def destroy
     @profile.destroy
+    @profile.requests.destroy_all
     respond_to do |format|
       format.html { redirect_to profiles_url, notice: 'El perfil fue eliminado exitosamente.' }
       format.json { head :no_content }
