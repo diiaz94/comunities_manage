@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :validate_authentication
   before_action :validate_member_access, only: [:create,:set_particles_profiles]
-  before_action :set_profile, only: [:show, :edit, :update, :destroy, :my_profile]]
+  before_action :set_profile, only: [:show, :edit, :update, :destroy, :my_profile]
   before_action :set_families, only: [:index, :new,:edit, :update, :my_profile]
   before_action :validate_fields, only: [:create, :update]
 
