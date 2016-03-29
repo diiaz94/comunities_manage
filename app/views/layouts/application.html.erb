@@ -77,6 +77,7 @@
 		<%end%>
 
 		<% if session[:type_user]=="Miembro"%>
+			<li id="op-comunities"><%= link_to 'Comunidad', comunity_path(current_user.profile.member.comunity)%></li>
 			<li id="op-families"><%= link_to 'Familias', families_path%></li>
 			<li id="op-profiles"><%= link_to 'Perfiles', profiles_path%></li>
 			<li id="op-requests"><%= link_to 'Solicitudes ('+Request.where(comunity_id: current_user.profile.member.comunity_id,status_request_id: StatusRequest.where(nombre: "Pendiente")[0].id).length.to_s+')', requests_path%></li>
