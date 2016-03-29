@@ -95,7 +95,7 @@ class ProfilesController < ApplicationController
   def my_profile
     @profile = current_user.profile
     @editing = true;
-    render 'edit'
+    render 'show'
   end
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -39,7 +39,16 @@ var days = [
 var today;		      
 var contador;
 var documentPDF;
-$(document).on('ready', function () {
+
+
+$(document).on('ready page:load', function () {
+  
+  	if($(".eliminar").length&&$(".eliminar").children().length==0)
+ 	 	$(".eliminar").append(" <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>")
+	if($(".mostrar").length&&$(".mostrar").children().length==0)	
+		$(".mostrar").append(" <span class='glyphicon glyphicon-check' aria-hidden='true'></span>")
+	if($(".editar").length&&$(".editar").children().length==0)
+  		$(".editar").append(" <span class='glyphicon glyphicon-edit' aria-hidden='true'></span>")
 
   if($("#notice").text().trim().length == 1){
     $("#notice").addClass("hidden");
@@ -52,19 +61,9 @@ $(document).on('ready', function () {
   }else{
     $("#error").removeClass("hidden");
   }
-});
 
-$(document).on('ready page:load', function () {
-  
-  	if($(".eliminar").length&&$(".eliminar").children().length==0)
- 	 	$(".eliminar").append(" <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>")
-	if($(".mostrar").length&&$(".mostrar").children().length==0)	
-		$(".mostrar").append(" <span class='glyphicon glyphicon-check' aria-hidden='true'></span>")
-	if($(".editar").length&&$(".editar").children().length==0)
-  		$(".editar").append(" <span class='glyphicon glyphicon-edit' aria-hidden='true'></span>")
-
-  var p = location.pathname.split("/")[1]
-  $("#op-"+p).addClass("active");
+ var p = location.pathname.split("/")[1]
+ $("#op-"+p).addClass("active");
  $("#op-users").addClass(p=="types"?"active":"");
  $("#op-requests").addClass(p=="type_requests"||p=="status_requests"?"active":"");
  $("#op-comunities").addClass(p=="families" || p=="profiles"|| p=="members"|| p=="jobs"?"active":"");

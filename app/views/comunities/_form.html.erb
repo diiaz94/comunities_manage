@@ -1,3 +1,22 @@
+
+<div id="notice" class="alert alert-success hidden" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only"></span>
+  <span class="cerrar" onclick="$('#notice').hide();">X</span>
+  <%=notice%>
+</div>
+<div id="error" class="alert alert-danger hidden" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  <span class="cerrar" onclick="$('#error').hide();">X</span>
+  <%=alert%>
+</div>
+<div id="warning" class="alert alert-warning " role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only"></span>
+  <span class="glyphicon glyphicon-remove cerrar" onclick="$('#warning').hide();"></span>
+  Recuerde que todos los campos marcados con un asterisco (*) son obligatorios.
+</div>
 <%= form_for(@comunity) do |f| %>
   <% if @comunity.errors.any? %>
     <div id="error_explanation">
@@ -12,7 +31,7 @@
   <% end %>
   
   <div class="field">
-    <%= f.label "Estado", "Seleccione estado" %><br>
+    <%= f.label "Estado", "Seleccione estado" %>*<br>
     <%if @comunity.parish%>
       <%=select_tag "comunity_Estado", options_from_collection_for_select(@states, "id", "nombre",@comunity.parish.town.state.nombre), onchange: "javascript: onChageState();"%>
     <%else%>
@@ -20,7 +39,7 @@
     <%end%>
   </div>
   <div class="field">
-    <%= f.label "Municipio", "Seleccione Municipio" %><br>
+    <%= f.label "Municipio", "Seleccione Municipio" %>*<br>
     <%if @comunity.parish%>
       <%=select_tag "comunity_Municipio", options_from_collection_for_select(@states[0].towns, "id", "nombre",@comunity.parish.town.nombre), onchange: "javascript: onChageTown();"%>
     <%else%>
@@ -29,7 +48,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :parish_id, "Seleccione Parroquia" %><br>
+    <%= f.label :parish_id, "Seleccione Parroquia" %>*<br>
     <%if @comunity.parish%>
       <%= f.select :parish_id, options_for_select(@states[0].towns[0].parishes.pluck(:nombre,:id),@comunity.parish.town.state.nombre)%>
     <%else%>
@@ -58,23 +77,23 @@
 
 
   <div class="field">
-    <%= f.label :rif %><br>
+    <%= f.label :rif %>*<br>
     <%= f.text_field :rif %>
   </div>
   <div class="field">
-    <%= f.label :cod_registro, "Codigo de Registro" %><br>
+    <%= f.label :cod_registro, "Codigo de Registro" %>*<br>
     <%= f.text_field :cod_registro %>
   </div>
   <div class="field">
-    <%= f.label :nombre %><br>
+    <%= f.label :nombre %>*<br>
     <%= f.text_field :nombre %>
   </div>
   <div class="field">
-    <%= f.label :catastro, "Numero de catastro" %><br>
+    <%= f.label :catastro, "Numero de catastro" %>*<br>
     <%= f.text_field :catastro %>
   </div>
   <div class="field">
-    <%= f.label :sector%><br>
+    <%= f.label :sector%>*<br>
     <%= f.text_field :sector %>
   </div>
   <div class="field">
