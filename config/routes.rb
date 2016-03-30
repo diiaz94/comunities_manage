@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   get 'admin_user' => 'welcome#admin_user', as: :admin_user
   get 'my_profile' => 'profiles#my_profile', as: :my_profile
   get 'my_comunity' => 'comunities#my_comunity', as: :my_comunity
+  get 'my_profile/edit' => 'profiles#my_profile_edit', as: :my_profile_edit
   get 'my_comunity/edit' => 'comunities#my_comunity_edit', as: :my_comunity_edit
   get 'register' => 'users#new', as: :register
   # The priority is based upon order of creation: first created -> highest priority.

@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   before_action :validate_authentication
   before_action :validate_member_access, only: [:create,:set_particles_profiles]
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
-  before_action :set_families, only: [:index, :new,:edit, :update, :my_profile]
+  before_action :set_families, only: [:index, :new,:edit, :update, :my_profile,:my_profile_edit]
   before_action :validate_fields, only: [:create, :update]
 
   # GET /profiles
@@ -61,9 +61,13 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1.json
   def update
     respond_to do |format|
+      @profile.slug=nil
       if @profile.update(profile_params)
-        format.html { redirect_to @profile, notice: 'El perfil fue actualizado exitosamente.' }
-        format.json { render :show, status: :ok, location: @profile }
+          @profile.user.cedula = @profile.cedula
+          @profile.user.save
+          ruta = @profile==current_user.profile ? my_profile_path : @profile
+          format.html { redirect_to ruta, notice: 'El perfil fue actualizado exitosamente.' }
+          format.json { render :show, status: :ok, location: @profile }
       else
         format.html { render :edit }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
@@ -94,8 +98,12 @@ class ProfilesController < ApplicationController
 
   def my_profile
     @profile = current_user.profile
-    @editing = true;
     render 'show'
+  end
+  def my_profile_edit
+    @profile = current_user.profile
+    @editing = true;
+    render 'edit'
   end
   private
     # Use callbacks to share common setup or constraints between actions.

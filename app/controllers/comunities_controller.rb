@@ -1,6 +1,7 @@
 class ComunitiesController < ApplicationController
   before_action :validate_authentication
   before_action :validate_admin_access, only: [:index, :create]
+  before_action :validate_member_access, except: [:index, :create]
   before_action :validate_member_specifyc_access, except: [:index,:my_comunity,:my_comunity_edit]
   before_action :set_comunity, only: [:show, :edit, :update, :destroy]
   before_action :set_location_values, only: [:index, :new,:edit, :update, :my_comunity,:my_comunity_edit]
@@ -44,6 +45,7 @@ class ComunitiesController < ApplicationController
   # PATCH/PUT /comunities/1.json
   def update
     respond_to do |format|
+      @comunity.slug=nil
       if @comunity.update(comunity_params)
         format.html { redirect_to @comunity, notice: 'Comunidad actualizada exitosamente.' }
         format.json { render :show, status: :ok, location: @comunity }
